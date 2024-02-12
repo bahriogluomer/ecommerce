@@ -1,9 +1,9 @@
-import "./App.css";
+import Main from "./layout/Main";
 
 function App() {
   return (
     <>
-      <p>Hello World!</p>
+      <Main />
     </>
   );
 }
