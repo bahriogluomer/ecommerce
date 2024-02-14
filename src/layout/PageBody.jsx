@@ -1,10 +1,9 @@
 import { Switch, Route } from "react-router-dom";
 import HomePage from "../pages/HomePage";
-import ShopPage from "../pages/ShopPage";
+import ProductListPage from "../pages/ProductListPage";
 import AboutPage from "../pages/AboutPage";
-import BlogPage from "../pages/BlogPage";
+import TeamPage from "../pages/TeamPage";
 import ContactPage from "../pages/ContactPage";
-import PagesPage from "../pages/PagesPage";
 
 export default function PageBody() {
   return (
@@ -13,22 +12,18 @@ export default function PageBody() {
         <Route path="/" exact>
           <HomePage />
         </Route>
-        <Route path="/shop">
-          <ShopPage />
+        <Route path="/products">
+          <ProductListPage />
         </Route>
         <Route path="/about">
           <AboutPage />
         </Route>
-        <Route path="/blog">
-          <BlogPage />
+        <Route path="/team">
+          <TeamPage />
         </Route>
         <Route path="/contact">
           <ContactPage />
         </Route>
-        <Route path="/pages">
-          <PagesPage />
-        </Route>
-
         <Route path="*">
           <h2 className="text-red-400">404 - Page not found</h2>
         </Route>
