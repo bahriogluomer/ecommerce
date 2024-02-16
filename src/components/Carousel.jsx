@@ -53,10 +53,10 @@ function Carousel() {
         </div>
       </div>
       <div className="absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl  p-2  text-white/80 hover:text-white cursor-pointer">
-        <BsChevronCompactLeft onClick={prevSlide} size={60} />
+        <BsChevronCompactLeft onClick={prevSlide} size={80} />
       </div>
       <div className="absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl p-2  text-white/80 hover:text-white cursor-pointer">
-        <BsChevronCompactRight onClick={nextSlide} size={60} />
+        <BsChevronCompactRight onClick={nextSlide} size={80} />
       </div>
       <div className="flex absolute bottom-4 right-0 left-0 justify-center py-2 gap-1">
         {slides.map((slide, slideIndex) => (

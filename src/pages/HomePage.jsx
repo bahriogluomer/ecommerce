@@ -75,14 +75,14 @@ export default function HomePage() {
           <h4 className="font-mont font-bold text-xl text-[#737373]">
             Featured Products
           </h4>
-          <h3 className="font-mont font-bold text-2xl text-[#252B42]">
+          <h3 className="font-bold text-2xl text-[#252B42]">
             BESTSELLER PRODUCTS
           </h3>
           <p className="font-mont font-medium text-sm text-[#737373]">
-            Problems trying to resolve the conflict between{" "}
+            Problems trying to resolve the conflict between
           </p>
         </div>
-        <div className="mx-auto max-w-[1440px] flex justify-between flex-wrap gap-9 px-36 py-12">
+        <div className="mx-auto max-w-[1440px] flex flex-wrap items-start content-start gap-9 px-36 py-12">
           {productData.map((product, index) => (
             <ProductCard
               key={index}
@@ -99,17 +99,17 @@ export default function HomePage() {
         <Carousel2 />
       </section>
       <section>
-        <div className="custom-container flex justify-around items-center py-1 ">
+        <div className="mx-auto max-w-[1440px] flex flex-wrap justify-around items-center py-1 ">
           <img src={couple} alt="" />
           <div className="flex flex-col gap-9 max-w-md ">
-            <h5 className="font-bold text-base text-[#BDBDBD]">SUMMER 2020</h5>
-            <h2 className="font-mont font-bold text-5xl text-[#252B42]">
+            <h2 className="font-bold text-base text-[#BDBDBD]">SUMMER 2020</h2>
+            <h3 className="font-mont font-bold text-5xl text-[#252B42]">
               Part of the Neural Universe
-            </h2>
-            <h4 className="font-normal text-xl text-[#737373]">
+            </h3>
+            <p className="font-normal text-xl text-[#737373]">
               We know how large objects will act, but things on a small scale.
-            </h4>
-            <div className="flex gap-9">
+            </p>
+            <div className="flex gap-4">
               <button className="w-fit font-bold text-sm text-[#FFFFFF] rounded-md bg-[#2DC071] py-3.5 px-10">
                 BUY NOW
               </button>
@@ -131,11 +131,11 @@ export default function HomePage() {
             </h3>
             <p className="font-medium text-sm text-center text-[#737373]">
               Problems trying to resolve the conflict between the two major
-              realms of Classical physics: Newtonian mechanics{" "}
+              realms of Classical physics: Newtonian mechanics
             </p>
           </div>
         </div>
-        <div className="flex justify-center gap-3">
+        <div className="flex justify-center flex-wrap gap-3">
           {postData.map((post, index) => (
             <PostCard
               key={index}

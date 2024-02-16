@@ -78,7 +78,7 @@ export default function Footer() {
           ))}
           <div className="flex flex-col">
             <h5 className="font-bold text-base mb-4">Get In Touch</h5>
-            <div className="items-center">
+            <div className="items-center flex">
               <input
                 placeholder="Your Email"
                 className="rounded-l-md py-4 bg-[#F9F9F9]"

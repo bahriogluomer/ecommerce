@@ -1,12 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
 
 export default function ProductCard(props) {
   const { img, title, category, oldPrice, newPrice } = props;
   return (
-    <div className="flex flex-col items-center">
-      <img className="w-60 h-[427px]" src={img} />
+    <div className="flex flex-col items-center m-auto">
+      <img className="min-w-60 h-[427px]" src={img} />
       <div className="flex flex-col gap-3 items-center pt-6  pb-9">
         <h5 className="font-mont font-bold text-base text-[#252B42]">
           {title}

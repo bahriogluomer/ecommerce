@@ -10,7 +10,7 @@ export default function PostCard(props) {
   return (
     <div className="flex justify-center gap-3">
       <div>
-        <div className="flex flex-col items-center pb-36">
+        <div className="flex flex-col items-center pb-24">
           <div>
             <div className="absolute bg-[#E74040] font-bold text-white text-lg m-3 px-2.5 rounded">
               New

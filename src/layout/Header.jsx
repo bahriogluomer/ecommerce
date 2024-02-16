@@ -70,26 +70,36 @@ const Header = () => {
       </div>
       <div className="flex justify-between max-w-screen items-center px-6">
         <nav className="inline-flex items-center gap-8 px-8">
-          <div className="py-4 ">
+          <div className="py-4">
             <h3 className="text-2xl font-bold">Bandage</h3>
           </div>
-          <div className="flex gap-4 font-bold text-[#737373] text-sm ml-20">
+          <div className="flex gap-4 font-bold text-[#737373] text-sm ml-32">
             <NavLink to="/" exact>
               Home
             </NavLink>
-            <NavLink to="/products">Shop</NavLink>
-            <NavLink to="/about">About</NavLink>
-            <NavLink to="/">Blog</NavLink>
-            <NavLink to="/contact">Contact</NavLink>
-            <NavLink to="team">Pages</NavLink>
+            <NavLink to="/products" exact>
+              Shop
+            </NavLink>
+            <NavLink to="/about" exact>
+              About
+            </NavLink>
+            <NavLink to="/" exact>
+              Blog
+            </NavLink>
+            <NavLink to="/contact" exact>
+              Contact
+            </NavLink>
+            <NavLink to="team" exact>
+              Pages
+            </NavLink>
           </div>
         </nav>
         <div className="inline-flex justify-end items-center text-primary gap-6">
           <div className="flex gap-2 items-center">
             <FontAwesomeIcon icon={faUser} className="color-primary" />
-            <span>Login</span>
-            <span>/</span>
-            <span>Register</span>
+            <span className="font-semibold">Login</span>
+            <span className="font-semibold">/</span>
+            <span className="font-semibold">Register</span>
           </div>
           <div className="flex gap-4 items-center">
             <FontAwesomeIcon icon={faMagnifyingGlass} size="lg" />
