@@ -9,6 +9,19 @@ import pc8 from "./assets/pc8.png";
 import post1 from "./assets/post1.png";
 import post2 from "./assets/post2.png";
 import post3 from "./assets/post3.png";
+import cc1 from "./assets/cc1.png";
+import cc2 from "./assets/cc2.png";
+import cc3 from "./assets/cc3.png";
+import cc4 from "./assets/cc4.png";
+import cc5 from "./assets/cc5.png";
+
+export const categoryData = [
+  { backgroundImage: cc1, title: "CLOTHS", count: "5 Items" },
+  { backgroundImage: cc2, title: "CLOTHS", count: "5 Items" },
+  { backgroundImage: cc3, title: "CLOTHS", count: "5 Items" },
+  { backgroundImage: cc4, title: "CLOTHS", count: "5 Items" },
+  { backgroundImage: cc5, title: "CLOTHS", count: "5 Items" },
+];
 
 export const productData = [
   {

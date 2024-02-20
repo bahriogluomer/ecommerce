@@ -17,7 +17,7 @@ export default function HomePage() {
       </section>
       <section
         id="editors-pick"
-        className="flex gap-9 flex-col justify-center items-center py-24"
+        className="flex gap-9 flex-col justify-center items-center py-24 sm:flex-wrap"
       >
         <div className="flex gap-3 flex-col items-center">
           <h3 className="font-mont font-bold text-2xl text-[#252B42]">

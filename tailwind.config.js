@@ -9,6 +9,8 @@ export default {
       colors: {
         primary: "#23A6F0",
         secondary: "#737373",
+        disabledtext: "#BDBDBD",
+        lightgray1: "#FAFAFA",
       },
     },
     screens: {

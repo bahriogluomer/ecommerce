@@ -29,25 +29,21 @@ function Carousel() {
   };
 
   return (
-    <div className="h-[716px] relative group">
+    <div className="h-[720px] relative group flex justify-center items-center">
       <div
         style={{
           backgroundImage: `url(${slides[currentIndex].url}) `,
         }}
-        className="w-full h-full bg-cover object-cover duration-500"
+        className="w-full h-full bg-cover object-cover duration-500 relative"
       >
-        <div className="flex flex-col gap-9 p-52">
-          <h5 className="font-mont font-bold text-base text-[#FFFFFF]">
-            SUMMER 2020
-          </h5>
-          <h2 className="font-mont font-bold text-6xl text-[#FFFFFF]">
-            NEW COLLECTION
-          </h2>
-          <h4 className="font-mont font-normal text-xl text-[#FFFFFF]">
+        <div className="text-xl flex flex-col gap-9 p-52 ml-20 sm:text-sm sm:items-center">
+          <h5 className="font-bold text-base text-[#FFFFFF]">SUMMER 2020</h5>
+          <h2 className="font-bold text-6xl text-[#FFFFFF]">NEW COLLECTION</h2>
+          <h4 className="font-normal text-xl text-[#FFFFFF]">
             We know how large objects will act,
             <br /> but things on a small scale.
           </h4>
-          <button className="w-fit font-mont font-bold rounded-md text-2xl text-[#FFFFFF] bg-[#2DC071] py-3.5 px-10">
+          <button className="w-fit font-bold rounded-md text-2xl text-[#FFFFFF] bg-[#2DC071] py-3.5 px-10 text-nowrap">
             SHOP NOW
           </button>
         </div>

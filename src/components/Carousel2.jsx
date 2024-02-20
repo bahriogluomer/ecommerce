@@ -36,30 +36,26 @@ function Carousel2() {
     <div className="h-[716px] relative group">
       <div
         style={{ background: `${slides[currentIndex].bgcolor}` }}
-        className="w-full h-full bg-cover object-cover duration-500 flex justify-around items-center "
+        className="w-full h-full bg-cover object-cover duration-500 flex justify-center gap-12 items-center sm:flex-wrap sm:h-[600px]"
       >
-        <div className="flex flex-col gap-9 ">
-          <h5 className="font-mont font-bold text-base text-[#FFFFFF]">
-            SUMMER 2020
-          </h5>
-          <h2 className="font-mont font-bold text-6xl text-[#FFFFFF]">
+        <div className="flex flex-col gap-12 ml-12 sm:text-center sm:text-sm">
+          <h5 className="font-bold text-base text-[#FFFFFF]">SUMMER 2020</h5>
+          <h2 className="font-bold text-6xl text-[#FFFFFF]">
             Vita Classic
             <br /> Product
           </h2>
-          <h4 className="font-mont font-normal text-xl text-[#FFFFFF]">
+          <h4 className="font-normal text-xl text-[#FFFFFF]">
             We know how large objects will act, We know
             <br /> how are objects will act, We know
           </h4>
-          <div className="flex gap-9">
-            <h3 className="font-mont font-bold text-2xl text-[#FFFFFF]">
-              $16.48
-            </h3>
-            <button className="w-fit font-mont font-bold text-sm text-[#FFFFFF] rounded-md bg-[#2DC071] py-3.5 px-10">
+          <div className="flex gap-9 sm:flex-col sm:items-center">
+            <h3 className="font-bold text-2xl text-[#FFFFFF]">$16.48</h3>
+            <button className="w-fit font-bold text-sm text-[#FFFFFF] rounded-md bg-[#2DC071] py-3.5 px-10">
               ADD TO CART
             </button>
           </div>
         </div>
-        <div className="h-full flex items-end">
+        <div className="h-full flex items-end mr-20 sm:items-start sm:justify-center sm:h-[681px]">
           <img className="" src={slides[currentIndex].image} alt="" />
         </div>
       </div>

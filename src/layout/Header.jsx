@@ -27,7 +27,7 @@ const Header = () => {
           <div className="inline-flex items-center gap-1">
             <FontAwesomeIcon icon={faEnvelope} className="text-white" />
             <span className="text-white font-bold	text-sm	">
-              bahriogluomer@gmail.com
+              michelle.rivera@example.com
             </span>
           </div>
         </div>

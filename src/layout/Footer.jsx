@@ -30,8 +30,8 @@ export default function Footer() {
   return (
     <footer className="flex flex-col">
       <div className=" bg-[#FAFAFA] p-12  ">
-        <div className="mx-auto  max-w-[1440px] flex items-center justify-between">
-          <h3 className="font-mont text-2xl font-bold">Bandage</h3>
+        <div className="mx-auto  max-w-[1440px] flex items-center justify-between sm:flex-col sm: gap-4 sm:items-start">
+          <h3 className="text-2xl font-bold">Bandage</h3>
           <div className="flex gap-6">
             <a href="">
               <FontAwesomeIcon
@@ -60,10 +60,10 @@ export default function Footer() {
       <hr className="w-[1440px] self-center" />
 
       <div className=" bg-[#FFFFFF] p-12 ">
-        <div className="mx-auto max-w-[1440px] flex justify-between">
+        <div className="mx-auto max-w-[1440px] flex justify-between sm:flex-wrap sm:gap-4 sm:flex-col">
           {data.map((section, index) => (
             <div key={index} className="flex flex-col">
-              <h5 className="font-mont font-bold text-base">{section.title}</h5>
+              <h5 className="font-bold text-base">{section.title}</h5>
               {section.items &&
                 section.items.map((item, itemIndex) => (
                   <a
@@ -78,7 +78,7 @@ export default function Footer() {
           ))}
           <div className="flex flex-col">
             <h5 className="font-bold text-base mb-4">Get In Touch</h5>
-            <div className="items-center flex">
+            <div className="items-center flex sm:justify-center">
               <input
                 placeholder="Your Email"
                 className="rounded-l-md py-4 bg-[#F9F9F9]"
@@ -91,9 +91,11 @@ export default function Footer() {
         </div>
       </div>
       <div className="bg-[#FAFAFA] p-6 ">
-        <div className="mx-auto max-w-[1440px]">
-          <p className="font-mont text-sm text-[#737373] font-bold">
-            Made With Love By Finland All Right Reserved{" "}
+        <div className="mx-auto max-w-[1440px] flex gap-2 sm:text-center sm:flex-col ">
+          <p className="text-sm text-secondary font-bold">Made With Love By </p>
+
+          <p className="text-sm text-secondary font-bold">
+            Finland All Right Reserved
           </p>
         </div>
       </div>
