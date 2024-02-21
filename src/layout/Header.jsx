@@ -18,7 +18,7 @@ import { NavLink } from "react-router-dom";
 const Header = () => {
   return (
     <header className="">
-      <div className="flex flex-row flex-wrap justify-between items-center max-w-full bg-[#252B42] min-h-[58px] px-10">
+      <div className="flex flex-row flex-wrap justify-between items-center max-w-full bg-[#252B42] min-h-[58px] px-10 sm:hidden">
         <div className="flex items-center gap-6">
           <div className="inline-flex  items-center gap-3 m=">
             <FontAwesomeIcon icon={faPhone} className="text-white" />
@@ -68,12 +68,12 @@ const Header = () => {
           </a>
         </div>
       </div>
-      <div className="flex justify-between max-w-screen items-center px-6">
-        <nav className="inline-flex items-center gap-8 px-8">
+      <div className="flex flex-wrap justify-between max-w-screen items-center px-6">
+        <nav className="flex flex-wrap items-center gap-8 px-8">
           <div className="py-4">
             <h3 className="text-2xl font-bold">Bandage</h3>
           </div>
-          <div className="flex gap-4 font-bold text-[#737373] text-sm ml-32">
+          <div className="flex flex-wrap gap-4 font-bold text-[#737373] text-sm ml-32 sm:flex-col">
             <NavLink to="/" exact>
               Home
             </NavLink>

@@ -57,7 +57,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <hr className="w-[1440px] self-center" />
+      <hr className="max-w-[1440px] self-center" />
 
       <div className=" bg-[#FFFFFF] p-12 ">
         <div className="mx-auto max-w-[1440px] flex justify-between sm:flex-wrap sm:gap-4 sm:flex-col">

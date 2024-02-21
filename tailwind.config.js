@@ -11,6 +11,7 @@ export default {
         secondary: "#737373",
         disabledtext: "#BDBDBD",
         lightgray1: "#FAFAFA",
+        darkgray: "#252B42",
       },
     },
     screens: {

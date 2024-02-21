@@ -14,6 +14,15 @@ import cc2 from "./assets/cc2.png";
 import cc3 from "./assets/cc3.png";
 import cc4 from "./assets/cc4.png";
 import cc5 from "./assets/cc5.png";
+import tu1 from "./assets/tu1.png";
+import tu2 from "./assets/tu2.png";
+import tu3 from "./assets/tu3.png";
+import tu4 from "./assets/tu4.png";
+import tu5 from "./assets/tu5.png";
+import tu6 from "./assets/tu6.png";
+import tu7 from "./assets/tu7.png";
+import tu8 from "./assets/tu8.png";
+import tu9 from "./assets/tu9.png";
 
 export const categoryData = [
   { backgroundImage: cc1, title: "CLOTHS", count: "5 Items" },
@@ -115,5 +124,71 @@ export const postData = [
       "We focus on ergonomics and meeting you where you work. It's only a keystroke away.",
     date: "22 April 2021",
     comments: "10 comments",
+  },
+];
+
+export const team1 = [
+  {
+    img: tu1,
+    title: "Username",
+    department: "Profession",
+  },
+  {
+    img: tu2,
+    title: "Username",
+    department: "Profession",
+  },
+  {
+    img: tu3,
+    title: "Username",
+    department: "Profession",
+  },
+];
+
+export const team2 = [
+  {
+    img: tu1,
+    title: "Username",
+    department: "Profession",
+  },
+  {
+    img: tu2,
+    title: "Username",
+    department: "Profession",
+  },
+  {
+    img: tu3,
+    title: "Username",
+    department: "Profession",
+  },
+  {
+    img: tu4,
+    title: "Username",
+    department: "Profession",
+  },
+  {
+    img: tu5,
+    title: "Username",
+    department: "Profession",
+  },
+  {
+    img: tu6,
+    title: "Username",
+    department: "Profession",
+  },
+  {
+    img: tu7,
+    title: "Username",
+    department: "Profession",
+  },
+  {
+    img: tu8,
+    title: "Username",
+    department: "Profession",
+  },
+  {
+    img: tu9,
+    title: "Username",
+    department: "Profession",
   },
 ];

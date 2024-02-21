@@ -17,19 +17,20 @@ export default function HomePage() {
       </section>
       <section
         id="editors-pick"
-        className="flex gap-9 flex-col justify-center items-center py-24 sm:flex-wrap"
+        className="flex flex-wrap gap-9 flex-col justify-center items-center py-24 "
       >
+        {/*editors picks kismina tekrar bak duzelt */}
         <div className="flex gap-3 flex-col items-center">
           <h3 className="font-mont font-bold text-2xl text-[#252B42]">
-            EDITOR’S PICK
+            EDITOR’S PICKS
           </h3>
           <p className="font-mont font-medium text-sm text-[#737373]">
             Problems trying to resolve the conflict between
           </p>
         </div>
-        <div className="flex gap-6">
-          <div className="flex gap-6">
-            <div className="flex w-[500px] h-[500px] relative">
+        <div className="max-w-[1050px] flex flex-wrap gap-6 sm:flex-col">
+          <div className="flex flex-wrap gap-6">
+            <div className="flex max-w-[500px] max-h-[500px] relative">
               <div className="flex items-end p-6 absolute w-full h-full">
                 <button className="bg-white font-bold text-base w-44 h-12">
                   MEN
@@ -37,7 +38,7 @@ export default function HomePage() {
               </div>
               <img src={edit1} alt="" />
             </div>
-            <div className="flex w-60 h-[500px] relative">
+            <div className="flex w-60 h-[500px] relative sm:w-full">
               <div className="flex items-end p-6 absolute w-full h-full">
                 <button className="bg-white font-bold text-base w-32 h-12">
                   WOMEN

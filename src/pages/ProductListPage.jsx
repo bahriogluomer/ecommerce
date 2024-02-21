@@ -9,11 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import ProductCard from "../components/ProductCard";
-import br1 from ".././assets/br1.png";
-import br2 from ".././assets/br2.png";
-import br3 from ".././assets/br3.png";
-import br4 from ".././assets/br4.png";
-import br5 from ".././assets/br5.png";
+import BrandsBanner from "../components/BrandsBanner";
 
 export default function ProductListPage() {
   const [isOpen, setIsOpen] = useState(false);
@@ -52,7 +48,7 @@ export default function ProductListPage() {
         </div>
       </section>
       <section className="m-auto max-w-[1440px] p-12">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between flex-wrap items-center sm:flex-col">
           <h6 className="font-bold text-base text-secondary">
             Showing all 12 results
           </h6>
@@ -126,14 +122,11 @@ export default function ProductListPage() {
           <button className="border rounded-r-md px-4 py-6">Next</button>
         </div>
       </section>
-      <section id="brands-banner" className="bg-lightgray1">
-        <div className="h-min-52 p-5 flex flex-wrap items-center content-center justify-center gap-32 sm:flex-col sm:justify-center">
-          <img className="object-contain" src={br1} alt="" />
-          <img className="object-contain" src={br2} alt="" />
-          <img className="object-contain" src={br3} alt="" />
-          <img className="object-contain" src={br4} alt="" />
-          <img className="object-contain" src={br5} alt="" />
-        </div>
+      <section
+        id="brands-banner"
+        className="bg-lightgray1 flex items-center justify-center"
+      >
+        <BrandsBanner />
       </section>
     </div>
   );
