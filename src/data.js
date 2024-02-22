@@ -23,6 +23,12 @@ import tu6 from "./assets/tu6.png";
 import tu7 from "./assets/tu7.png";
 import tu8 from "./assets/tu8.png";
 import tu9 from "./assets/tu9.png";
+import dt1 from "./assets/dt1.png";
+import dt2 from "./assets/dt2.png";
+import dt3 from "./assets/dt3.png";
+import dt4 from "./assets/dt4.png";
+import dt5 from "./assets/dt5.png";
+import dt6 from "./assets/dt6.png";
 
 export const categoryData = [
   { backgroundImage: cc1, title: "CLOTHS", count: "5 Items" },
@@ -190,5 +196,64 @@ export const team2 = [
     img: tu9,
     title: "Username",
     department: "Profession",
+  },
+];
+
+export const productData2 = [
+  {
+    img: dt1,
+    title: "Graphic Design",
+    category: "English Department",
+    oldPrice: "$16.48",
+    newPrice: "$6.48",
+  },
+  {
+    img: dt2,
+    title: "Graphic Design",
+    category: "English Department",
+    oldPrice: "$16.48",
+    newPrice: "$6.48",
+  },
+  {
+    img: dt3,
+    title: "Graphic Design",
+    category: "English Department",
+    oldPrice: "$16.48",
+    newPrice: "$6.48",
+  },
+  {
+    img: dt4,
+    title: "Graphic Design",
+    category: "English Department",
+    oldPrice: "$16.48",
+    newPrice: "$6.48",
+  },
+  {
+    img: dt5,
+    title: "Graphic Design",
+    category: "English Department",
+    oldPrice: "$16.48",
+    newPrice: "$6.48",
+  },
+  {
+    img: dt6,
+    title: "Graphic Design",
+    category: "English Department",
+    oldPrice: "$16.48",
+    newPrice: "$6.48",
+  },
+  {
+    img: dt1,
+    title: "Graphic Design",
+    category: "English Department",
+    oldPrice: "$16.48",
+    newPrice: "$6.48",
+  },
+  {
+    img: dt2,
+    title: "Graphic Design",
+    category: "English Department",
+    oldPrice: "$16.48",
+    newPrice: "$6.48",
   },
 ];

@@ -149,7 +149,7 @@ export default function AboutPage() {
         <BrandsBanner />
       </section>
       <section id="cta" className="max-w-[1440px] m-auto flex">
-        <div className="bg-[#2A7CC7] text-white p-48 sm:text-center sm:p-36">
+        <div className="bg-[#2A7CC7] text-white p-48 sm:text-center sm:p-24">
           <div className="flex flex-col gap-9 sm:items-center">
             <h3 className="font-bold text-base"> WORK WITH US</h3>
             <h4 className="font-bold text-4xl">Now Let's grow Yours</h4>

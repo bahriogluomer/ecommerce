@@ -4,10 +4,11 @@ import ProductListPage from "../pages/ProductListPage";
 import AboutPage from "../pages/AboutPage";
 import TeamPage from "../pages/TeamPage";
 import ContactPage from "../pages/ContactPage";
+import ProductDetailPage from "../pages/ProductDetailPage";
 
 export default function PageBody() {
   return (
-    <div>
+    <>
       <Switch>
         <Route path="/" exact>
           <HomePage />
@@ -24,10 +25,13 @@ export default function PageBody() {
         <Route path="/contact">
           <ContactPage />
         </Route>
+        <Route path="/product">
+          <ProductDetailPage />
+        </Route>
         <Route path="*">
-          <h2 className="text-red-400">404 - Page not found</h2>
+          <h2 className="text-red-400 text-center">404 - Page not found</h2>
         </Route>
       </Switch>
-    </div>
+    </>
   );
 }

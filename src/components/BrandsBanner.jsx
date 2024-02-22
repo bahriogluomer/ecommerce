@@ -6,7 +6,7 @@ import br5 from ".././assets/br5.png";
 
 export default function BrandsBanner() {
   return (
-    <div className="m-auto max-w-[1440px] p-5 flex flex-wrap items-center content-center justify-between gap-32 sm:flex-col sm:justify-center">
+    <div className="m-auto max-w-[1440px] bg-inherit p-5 flex flex-wrap items-center content-center justify-around gap-32 sm:flex-col sm:justify-center">
       <img className="object-contain" src={br1} alt="" />
       <img className="object-contain" src={br2} alt="" />
       <img className="object-contain" src={br3} alt="" />
