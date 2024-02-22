@@ -28,7 +28,7 @@ export default function HomePage() {
             Problems trying to resolve the conflict between
           </p>
         </div>
-        <div className="max-w-[1050px] flex flex-wrap gap-6 sm:flex-col">
+        <div className="max-w-[1050px] flex flex-wrap gap-6 sm:flex-col sm:items-center sm:justify-center">
           <div className="flex flex-wrap gap-6">
             <div className="flex max-w-[500px] max-h-[500px] relative">
               <div className="flex items-end p-6 absolute w-full h-full">
@@ -38,7 +38,7 @@ export default function HomePage() {
               </div>
               <img src={edit1} alt="" />
             </div>
-            <div className="flex w-60 h-[500px] relative sm:w-full">
+            <div className="flex max-w-[500px] h-[500px] relative">
               <div className="flex items-end p-6 absolute w-full h-full">
                 <button className="bg-white font-bold text-base w-32 h-12">
                   WOMEN
@@ -83,7 +83,7 @@ export default function HomePage() {
             Problems trying to resolve the conflict between
           </p>
         </div>
-        <div className="mx-auto max-w-[1440px] flex flex-wrap items-start content-start gap-9 px-36 py-12">
+        <div className="mx-auto max-w-[1440px] flex flex-wrap items-start content-start gap-9 px-36 py-12 sm:items-center sm:justify-center">
           {productData.map((product, index) => (
             <ProductCard
               key={index}
