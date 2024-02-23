@@ -9,7 +9,7 @@ import SignUpPage from "../pages/SignUpPage";
 
 export default function PageBody() {
   return (
-    <>
+    <main>
       <Switch>
         <Route path="/" exact>
           <HomePage />
@@ -37,6 +37,6 @@ export default function PageBody() {
           <h2 className="text-red-400 text-center">404 - Page not found</h2>
         </Route>
       </Switch>
-    </>
+    </main>
   );
 }

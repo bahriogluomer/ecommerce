@@ -65,6 +65,7 @@ export default function SignUpPage() {
             name="role_id"
             id="role"
             defaultValue={"customer"}
+            {...register("role_id", { required: true })}
             className="border rounded-md p-2 bg-lightgray1"
           >
             <option value="customer">Customer</option>
