@@ -100,7 +100,7 @@ const Header = () => {
               Contact
             </NavLink>
             <NavLink to="team" exact>
-              Pages
+              Team
             </NavLink>
           </div>
         </nav>
@@ -151,7 +151,7 @@ const Header = () => {
                 Contact
               </NavLink>
               <NavLink to="team" exact>
-                Pages
+                Team
               </NavLink>
             </div>
           </nav>
