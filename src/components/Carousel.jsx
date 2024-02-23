@@ -29,32 +29,35 @@ function Carousel() {
   };
 
   return (
-    <div className="h-[720px] relative group flex justify-center items-center">
+    <div className="h-[720px] relative group flex">
       <div
         style={{
           backgroundImage: `url(${slides[currentIndex].url}) `,
         }}
-        className="w-full h-full bg-cover object-cover duration-500 relative"
+        className="h-auto w-full bg-cover bg-no-repeat bg-center duration-500 relative"
       >
-        <div className="text-xl flex flex-col gap-9 p-52 ml-20 sm:text-sm sm:items-center">
-          <h5 className="font-bold text-base text-[#FFFFFF]">SUMMER 2020</h5>
-          <h2 className="font-bold text-6xl text-[#FFFFFF]">NEW COLLECTION</h2>
-          <h4 className="font-normal text-xl text-[#FFFFFF]">
-            We know how large objects will act,
-            <br /> but things on a small scale.
-          </h4>
-          <button className="w-fit font-bold rounded-md text-2xl text-[#FFFFFF] bg-[#2DC071] py-3.5 px-10 text-nowrap">
+        <div className="flex flex-col gap-12  p-52 sm:gap-9 ml-20 l:ml-10 md:scale-90 md:ml-0 sm:items-center sm:scale-75">
+          <h5 className="font-bold text-base text-white text-nowrap">
+            SUMMER 2020
+          </h5>
+          <h1 className="font-bold text-5xl sm:text-4xl sm:text-center text-white">
+            NEW COLLECTION
+          </h1>
+          <p className="md:text-start text-xl text-white w-96 sm:w-72 sm:text-center">
+            We know how large objects will act, but things on a small scale.
+          </p>
+          <button className="w-fit font-bold rounded-md text-2xl text-nowrap sm:scale-75 text-white bg-green-500 py-3.5 px-10">
             SHOP NOW
           </button>
         </div>
       </div>
-      <div className="absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl  p-2  text-white/80 hover:text-white cursor-pointer">
+      <div className="absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl  p-2  text-white/80 hover:text-white cursor-pointer sm:scale-75">
         <BsChevronCompactLeft onClick={prevSlide} size={80} />
       </div>
-      <div className="absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl p-2  text-white/80 hover:text-white cursor-pointer">
+      <div className="absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl p-2  text-white/80 hover:text-white cursor-pointer sm:scale-75">
         <BsChevronCompactRight onClick={nextSlide} size={80} />
       </div>
-      <div className="flex absolute bottom-4 right-0 left-0 justify-center py-2 gap-1">
+      <div className="flex absolute bottom-4 right-0 left-0 justify-center py-2 gap-1 sm:scale-75">
         {slides.map((slide, slideIndex) => (
           <div
             key={slideIndex}
