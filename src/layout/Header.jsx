@@ -111,7 +111,7 @@ const Header = () => {
               Login
             </NavLink>
             <span className="font-semibold">/</span>
-            <NavLink to="#" className="font-semibold">
+            <NavLink to="/signup" className="font-semibold">
               Register
             </NavLink>
           </div>
@@ -162,7 +162,7 @@ const Header = () => {
                 Login
               </NavLink>
               <span className="font-semibold">/</span>
-              <NavLink to="#" className="font-semibold">
+              <NavLink to="/signup" className="font-semibold">
                 Register
               </NavLink>
             </div>
