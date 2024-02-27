@@ -26,7 +26,7 @@ const Header = () => {
 
   return (
     <header className="">
-      <div className="flex flex-row flex-wrap justify-between items-center max-w-full bg-[#252B42] min-h-[58px] px-10 sm:hidden">
+      <div className="flex flex-row flex-wrap justify-between items-center max-w-full bg-[#252B42] min-h-[58px] px-10 md:hidden">
         <div className="flex items-center gap-6">
           <div className="inline-flex  items-center gap-3 m=">
             <FontAwesomeIcon icon={faPhone} className="text-white" />
