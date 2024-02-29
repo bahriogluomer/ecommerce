@@ -3,6 +3,9 @@ import { toast } from "react-toastify";
 import { useHistory } from "react-router";
 import { FaSpinner } from "react-icons/fa";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setUserActionCreator } from "../store/actions/userActions";
+import { axiosInstance } from "../axios/axiosInstance";
 
 const initialForm = {
   email: "",
@@ -14,17 +17,38 @@ export default function LoginPage() {
     register,
     handleSubmit,
     formState: { errors, isValid },
-    watch,
-    reset,
   } = useForm({
     defaultValues: initialForm,
     mode: "onChange",
   });
-
+  const dispatch = useDispatch();
   const [submitting, setSubmitting] = useState(false);
 
+  const history = useHistory();
+
+  const user = useSelector((store) => store.user.userData);
+  console.log("user token ", user?.token);
+  console.log("username ", user?.name);
+
   function onFormSubmit(formData) {
-    console.log(formData);
+    setSubmitting(true);
+    axiosInstance
+      .post("/login", formData)
+      .then((res) => {
+        console.log("status:", res.status, "response data:", res.data);
+        localStorage.setItem("token", res.data.token);
+        dispatch(setUserActionCreator(res.data));
+        toast.success(
+          "Login successfull! You are being redirected to home page."
+        );
+        setSubmitting(false);
+        history.push("/");
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error(`Login failed. ${err.message}`);
+        setSubmitting(false);
+      });
   }
 
   return (

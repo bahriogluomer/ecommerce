@@ -15,10 +15,13 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import Gravatar from "react-gravatar";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const user = useSelector((store) => store.user.userData);
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
@@ -76,9 +79,9 @@ const Header = () => {
           </a>
         </div>
       </div>
-      <div className="flex shrink items-center justify-between px-8 md:py-4 md:px-6">
+      <div className="flex items-center justify-between gap-4 px-8 py-4 lg:gap-0 md:px-6">
         <nav className="flex items-center gap-4 px-6 md:px-1 md:gap-1">
-          <div className="py-4">
+          <div>
             <h3 className="text-2xl font-bold sm:text-xl text-darkgray">
               Bandage
             </h3>
@@ -104,38 +107,51 @@ const Header = () => {
             </NavLink>
           </div>
         </nav>
-        <div className="flex shrink justify-end items-center text-sm text-primary gap-4 lg:gap-1">
-          <div className="flex gap-2 items-center md:hidden">
-            <FontAwesomeIcon icon={faUser} className="color-primary" />
-            <NavLink to="/login" className="font-semibold">
-              Login
-            </NavLink>
-            <span className="font-semibold">/</span>
-            <NavLink to="/signup" className="font-semibold">
-              Register
-            </NavLink>
+        <div className="max-w-full flex gap-4">
+          <div className="flex justify-end items-center text-sm text-primary gap-4 lg:gap-2">
+            {user ? (
+              <div className="flex font-bold text-secondary items-center justify-center gap-4 mr-2 lg:gap-2 md:hidden">
+                <div className="text-nowrap">Welcome {user.name}!</div>
+                <div className="flex items-center justify-center">
+                  <Gravatar
+                    email={user.email}
+                    className="min-w-6 min-h-6 max-w-8 max-h-8 rounded-full"
+                  />
+                </div>
+              </div>
+            ) : (
+              <div className="flex gap-2 items-center md:hidden">
+                <FontAwesomeIcon icon={faUser} className="color-primary" />
+                <NavLink to="/login" className="font-semibold">
+                  Login
+                </NavLink>
+                <span className="font-semibold">/</span>
+                <NavLink to="/signup" className="font-semibold">
+                  Register
+                </NavLink>
+              </div>
+            )}
+            <div className="flex gap-4 items-center lg:gap-2 md:text-darkgray">
+              <FontAwesomeIcon icon={faMagnifyingGlass} size="lg" />
+              <FontAwesomeIcon icon={faCartShopping} size="lg" />
+              <span>1</span>
+              <FontAwesomeIcon icon={faHeart} size="lg" />
+              <span>1</span>
+            </div>
           </div>
-          <div className="flex gap-4 items-center lg:gap-2 md:text-darkgray">
-            <FontAwesomeIcon icon={faMagnifyingGlass} size="lg" />
-            <FontAwesomeIcon icon={faCartShopping} size="lg" />
-            <span>1</span>
-            <FontAwesomeIcon icon={faHeart} size="lg" />
-            <span>1</span>
+          <div className="flex gap-4">
+            <Gravatar
+              email={user.email}
+              className="w-6 h-6 rounded-full hidden md:block"
+            />
+            <button
+              onClick={toggleNavbar}
+              className="hidden md:flex md:items-center md:justify-center text-darkgray"
+            >
+              <FontAwesomeIcon icon={faBars} size="xl" />
+            </button>
           </div>
         </div>
-        {/* <div className="hidden md:flex items-center text-darkgray">
-          <FontAwesomeIcon icon={faMagnifyingGlass} size="lg" />
-          <FontAwesomeIcon icon={faCartShopping} size="lg" />
-          <span>1</span>
-          <FontAwesomeIcon icon={faHeart} size="lg" />
-          <span>1</span>
-        </div> */}
-        <button
-          onClick={toggleNavbar}
-          className="hidden md:flex md:items-center md:justify-center text-darkgray"
-        >
-          <FontAwesomeIcon icon={faBars} size="xl" />
-        </button>
       </div>
 
       {isOpen && (
@@ -163,16 +179,22 @@ const Header = () => {
             </div>
           </nav>
           <div className="flex flex-col items-center text-primary gap-4 my-8">
-            <div className="flex gap-2 items-center">
-              <FontAwesomeIcon icon={faUser} className="color-primary" />
-              <NavLink to="/login" className="font-semibold">
-                Login
-              </NavLink>
-              <span className="font-semibold">/</span>
-              <NavLink to="/signup" className="font-semibold">
-                Register
-              </NavLink>
-            </div>
+            {user ? (
+              <div className="flex font-bold text-secondary">
+                Welcome {user.name}!
+              </div>
+            ) : (
+              <div className="flex gap-2 items-center">
+                <FontAwesomeIcon icon={faUser} className="color-primary" />
+                <NavLink to="/login" className="font-semibold">
+                  Login
+                </NavLink>
+                <span className="font-semibold">/</span>
+                <NavLink to="/signup" className="font-semibold">
+                  Register
+                </NavLink>
+              </div>
+            )}
           </div>
         </div>
       )}
