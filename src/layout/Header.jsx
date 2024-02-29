@@ -107,7 +107,7 @@ const Header = () => {
         <div className="flex shrink justify-end items-center text-sm text-primary gap-4 lg:gap-1">
           <div className="flex gap-2 items-center md:hidden">
             <FontAwesomeIcon icon={faUser} className="color-primary" />
-            <NavLink to="#" className="font-semibold">
+            <NavLink to="/login" className="font-semibold">
               Login
             </NavLink>
             <span className="font-semibold">/</span>
@@ -165,7 +165,7 @@ const Header = () => {
           <div className="flex flex-col items-center text-primary gap-4 my-8">
             <div className="flex gap-2 items-center">
               <FontAwesomeIcon icon={faUser} className="color-primary" />
-              <NavLink to="#" className="font-semibold">
+              <NavLink to="/login" className="font-semibold">
                 Login
               </NavLink>
               <span className="font-semibold">/</span>
