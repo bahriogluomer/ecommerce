@@ -1,13 +1,11 @@
-import Axios from "axios";
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import { FaSpinner } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router";
-
-const axiosInstance = Axios.create({
-  baseURL: "https://workintech-fe-ecommerce.onrender.com",
-});
+import { axiosInstance } from "../axios/axiosInstance";
+import { useDispatch, useSelector } from "react-redux";
+import { getRoles } from "../store/actions/globalActions";
 
 const initialForm = {
   name: "",
@@ -39,34 +37,25 @@ export default function SignUpPage() {
     defaultValues: initialForm,
   });
 
-  const [roles, setRoles] = useState([]);
+  const dispatch = useDispatch();
+  const roles = useSelector((store) => store.global.roles);
   const [submitting, setSubmitting] = useState(false);
   const history = useHistory();
 
+  //API call for fetching roles
   useEffect(() => {
-    axiosInstance
-      .get("/roles")
-      .then((res) => {
-        setRoles(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    dispatch(getRoles());
   }, []);
 
   const role = watch("role_id");
 
   function onFormSubmit(formData) {
+    // If not 'store', delete the store related fields from the data object
     if (formData.role_id !== "2") {
-      // If not 'store', delete the store related fields from the data object
       delete formData.store;
     }
     delete formData.confirm_password;
-    // setTimeout(() => {
-    //   console.log(formData);
-    //   setSubmitting(false);
-    //   toast.success("Form submitted successfully!");
-    // }, 5000);
+
     setSubmitting(true);
     axiosInstance
       .post("/signup", formData)
@@ -87,14 +76,8 @@ export default function SignUpPage() {
       });
   }
 
-  //TODO 1) Add a toast notification for successful form submission
-  //TODO 2) Add a toast notification for unsuccessful form submission
-  //TODO 3) Add a toast notification for server errors
-  //TODO 6) store name must include at least one letter
-  //TODO 7) Add API for form submission
-
   return (
-    <div className="flex flex-col items-center justify-center my-36">
+    <div className="flex flex-col items-center justify-center my-36 md:my-20">
       <h1 className="font-bold text-2xl text-center text-darkgray my-12">
         Signup Form
       </h1>

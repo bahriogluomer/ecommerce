@@ -12,7 +12,7 @@ import PostCard from "../components/PostCard";
 export default function HomePage() {
   return (
     <>
-      <section>
+      <section className="w-full">
         <Carousel />
       </section>
       <section

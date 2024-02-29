@@ -76,7 +76,7 @@ const Header = () => {
           </a>
         </div>
       </div>
-      <div className="flex shrink items-center justify-between px-8 md:py-4 md:px-6 ">
+      <div className="flex shrink items-center justify-between px-8 md:py-4 md:px-6">
         <nav className="flex items-center gap-4 px-6 md:px-1 md:gap-1">
           <div className="py-4">
             <h3 className="text-2xl font-bold sm:text-xl text-darkgray">
@@ -104,8 +104,8 @@ const Header = () => {
             </NavLink>
           </div>
         </nav>
-        <div className="flex shrink justify-end items-center text-sm text-primary gap-4 lg:gap-1 md:hidden">
-          <div className="flex gap-2 items-center">
+        <div className="flex shrink justify-end items-center text-sm text-primary gap-4 lg:gap-1">
+          <div className="flex gap-2 items-center md:hidden">
             <FontAwesomeIcon icon={faUser} className="color-primary" />
             <NavLink to="#" className="font-semibold">
               Login
@@ -115,7 +115,7 @@ const Header = () => {
               Register
             </NavLink>
           </div>
-          <div className="flex gap-4 items-center lg:gap-2">
+          <div className="flex gap-4 items-center lg:gap-2 md:text-darkgray">
             <FontAwesomeIcon icon={faMagnifyingGlass} size="lg" />
             <FontAwesomeIcon icon={faCartShopping} size="lg" />
             <span>1</span>
@@ -123,6 +123,13 @@ const Header = () => {
             <span>1</span>
           </div>
         </div>
+        {/* <div className="hidden md:flex items-center text-darkgray">
+          <FontAwesomeIcon icon={faMagnifyingGlass} size="lg" />
+          <FontAwesomeIcon icon={faCartShopping} size="lg" />
+          <span>1</span>
+          <FontAwesomeIcon icon={faHeart} size="lg" />
+          <span>1</span>
+        </div> */}
         <button
           onClick={toggleNavbar}
           className="hidden md:flex md:items-center md:justify-center text-darkgray"
@@ -132,7 +139,7 @@ const Header = () => {
       </div>
 
       {isOpen && (
-        <div className="flex flex-col items-center justify-center my-10">
+        <div className="hidden flex-col items-center justify-center my-10 md:flex">
           <nav className="flex w-full items-center justify-center">
             <div className="flex flex-col w-full font-bold gap-4 text-secondary text-center m-auto">
               <NavLink to="/" exact>
@@ -165,13 +172,6 @@ const Header = () => {
               <NavLink to="/signup" className="font-semibold">
                 Register
               </NavLink>
-            </div>
-            <div className="flex gap-4 items-center lg:gap-2">
-              <FontAwesomeIcon icon={faMagnifyingGlass} size="lg" />
-              <FontAwesomeIcon icon={faCartShopping} size="lg" />
-              <span>1</span>
-              <FontAwesomeIcon icon={faHeart} size="lg" />
-              <span>1</span>
             </div>
           </div>
         </div>

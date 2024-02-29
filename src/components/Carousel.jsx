@@ -29,14 +29,20 @@ function Carousel() {
   };
 
   return (
-    <div className="h-[720px] relative group flex">
+    <div className="h-[960px] w-full relative flex">
       <div
         style={{
           backgroundImage: `url(${slides[currentIndex].url}) `,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+          width: "100%",
+          height: "100%",
+          display: "block",
         }}
-        className="h-auto w-full bg-cover bg-no-repeat bg-center duration-500 relative"
+        className="duration-500 relative"
       >
-        <div className="flex flex-col gap-12  p-52 sm:gap-9 ml-20 l:ml-10 md:scale-90 md:ml-0 sm:items-center sm:scale-75">
+        <div className="flex flex-col gap-12 p-52 mt-20 ml-20 l:ml-10 md:scale-90 md:ml-0 sm:items-center sm:justify-center sm:gap-9 sm:scale-75">
           <h5 className="font-bold text-base text-white text-nowrap">
             SUMMER 2020
           </h5>
