@@ -6,12 +6,12 @@ import br5 from ".././assets/br5.png";
 
 export default function BrandsBanner() {
   return (
-    <div className="m-auto max-w-[1440px] bg-inherit p-5 flex flex-wrap items-center content-center justify-around gap-32 sm:flex-col sm:justify-center">
-      <img className="object-contain" src={br1} alt="" />
-      <img className="object-contain" src={br2} alt="" />
-      <img className="object-contain" src={br3} alt="" />
-      <img className="object-contain" src={br4} alt="" />
-      <img className="object-contain" src={br5} alt="" />
+    <div className="w-full bg-inherit px-5 py-10 flex flex-wrap items-center content-center justify-around gap-32 sm:flex-col sm:justify-center">
+      <img className="object-contain scale-125" src={br1} alt="" />
+      <img className="object-contain scale-125" src={br2} alt="" />
+      <img className="object-contain scale-125" src={br3} alt="" />
+      <img className="object-contain scale-125" src={br4} alt="" />
+      <img className="object-contain scale-125" src={br5} alt="" />
     </div>
   );
 }

@@ -7,6 +7,7 @@ import ContactPage from "../pages/ContactPage";
 import ProductDetailPage from "../pages/ProductDetailPage";
 import SignUpPage from "../pages/SignUpPage";
 import ErrorPage from "../pages/ErrorPage";
+import LoginPage from "../pages/LoginPage";
 
 export default function PageBody() {
   return (
@@ -32,6 +33,9 @@ export default function PageBody() {
         </Route>
         <Route path="/signup">
           <SignUpPage />
+        </Route>
+        <Route path="/login">
+          <LoginPage />
         </Route>
         <Route path="*">
           <ErrorPage />

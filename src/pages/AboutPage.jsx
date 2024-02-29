@@ -144,12 +144,12 @@ export default function AboutPage() {
       </section>
       <section
         id="brands-banner"
-        className="bg-lightgray1 flex items-center justify-center"
+        className="bg-lightgray1 max-w-[1440px] m-auto flex items-center justify-center"
       >
         <BrandsBanner />
       </section>
       <section id="cta" className="max-w-[1440px] m-auto flex">
-        <div className="bg-[#2A7CC7] text-white p-48 sm:text-center sm:p-24">
+        <div className="max-w-[720px] bg-[#2A7CC7] text-white p-48 sm:text-center sm:p-24 flex">
           <div className="flex flex-col gap-9 sm:items-center">
             <h3 className="font-bold text-base"> WORK WITH US</h3>
             <h4 className="font-bold text-4xl">Now Let's grow Yours</h4>
@@ -162,8 +162,8 @@ export default function AboutPage() {
             </button>
           </div>
         </div>
-        <div className="md:hidden sm:hidden">
-          <img src={aboutwoman} alt="" className="w-[968px] h-[652px]" />
+        <div className="w-full md:hidden sm:hidden">
+          <img src={aboutwoman} alt="" className="w-full object-cover h-full" />
         </div>
       </section>
     </>
