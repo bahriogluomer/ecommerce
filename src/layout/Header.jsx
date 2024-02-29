@@ -141,7 +141,7 @@ const Header = () => {
           </div>
           <div className="flex gap-4">
             <Gravatar
-              email={user.email}
+              email={user?.email}
               className="w-6 h-6 rounded-full hidden md:block"
             />
             <button
