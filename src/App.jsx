@@ -12,7 +12,6 @@ function App() {
   useEffect(() => {
     if (user) {
       toast.success(`Welcome back ${user?.name} !`);
-      console.log("user", user);
     }
   }, []);
 

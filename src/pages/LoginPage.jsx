@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { useHistory } from "react-router";
 import { FaSpinner } from "react-icons/fa";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setUserActionCreator } from "../store/actions/userActions";
 import { axiosInstance } from "../axios/axiosInstance";
 
@@ -25,10 +25,6 @@ export default function LoginPage() {
   const [submitting, setSubmitting] = useState(false);
 
   const history = useHistory();
-
-  const user = useSelector((store) => store.user.userData);
-  console.log("user token ", user?.token);
-  console.log("username ", user?.name);
 
   function onFormSubmit(formData) {
     setSubmitting(true);

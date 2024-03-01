@@ -122,8 +122,8 @@ const Header = () => {
               <div className="flex font-bold text-secondary items-center justify-center gap-4 mr-2 lg:gap-2 md:hidden">
                 <div className="text-nowrap">Welcome {user.name}!</div>
                 <div className="flex items-center justify-center">
-                  <button>
-                    {" "}
+                  {/* temporarily put logout function here until modal is implemented */}
+                  <button onClick={logout}>
                     <Gravatar
                       email={user.email}
                       className="min-w-6 min-h-6 max-w-8 max-h-8 rounded-full"
@@ -152,7 +152,8 @@ const Header = () => {
             </div>
           </div>
           <div className="flex gap-4">
-            <button>
+            {/* temporarily put logout function here until modal is implemented */}
+            <button onClick={logout}>
               <Gravatar
                 email={user?.email}
                 className="w-6 h-6 rounded-full hidden md:block"
