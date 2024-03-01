@@ -38,9 +38,7 @@ export default function LoginPage() {
         console.log("status:", res.status, "response data:", res.data);
         localStorage.setItem("token", res.data.token);
         dispatch(setUserActionCreator(res.data));
-        toast.success(
-          "Login successfull! You are being redirected to home page."
-        );
+        toast.success("Login successfull! Redirecting you to home page.");
         setSubmitting(false);
         history.push("/");
       })
