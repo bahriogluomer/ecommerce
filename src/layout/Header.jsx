@@ -15,16 +15,25 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import Gravatar from "react-gravatar";
+import { logOutActionCreator } from "../store/actions/userActions";
+import { toast } from "react-toastify";
 
 const Header = () => {
+  const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const user = useSelector((store) => store.user.userData);
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
+  };
+
+  const logout = () => {
+    dispatch(logOutActionCreator());
+    localStorage.removeItem("token");
+    toast.success("Logged out successfully");
   };
 
   return (
@@ -113,10 +122,13 @@ const Header = () => {
               <div className="flex font-bold text-secondary items-center justify-center gap-4 mr-2 lg:gap-2 md:hidden">
                 <div className="text-nowrap">Welcome {user.name}!</div>
                 <div className="flex items-center justify-center">
-                  <Gravatar
-                    email={user.email}
-                    className="min-w-6 min-h-6 max-w-8 max-h-8 rounded-full"
-                  />
+                  <button>
+                    {" "}
+                    <Gravatar
+                      email={user.email}
+                      className="min-w-6 min-h-6 max-w-8 max-h-8 rounded-full"
+                    />
+                  </button>
                 </div>
               </div>
             ) : (
@@ -140,10 +152,13 @@ const Header = () => {
             </div>
           </div>
           <div className="flex gap-4">
-            <Gravatar
-              email={user?.email}
-              className="w-6 h-6 rounded-full hidden md:block"
-            />
+            <button>
+              <Gravatar
+                email={user?.email}
+                className="w-6 h-6 rounded-full hidden md:block"
+              />
+            </button>
+
             <button
               onClick={toggleNavbar}
               className="hidden md:flex md:items-center md:justify-center text-darkgray"
