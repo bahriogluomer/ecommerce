@@ -1,4 +1,3 @@
-import { axiosInstance } from "../../axios/axiosInstance";
 import { globalActions } from "../reducers/globalReducer";
 
 export const setRolesActionCreator = (roles) => {
@@ -15,13 +14,4 @@ export const setThemeActionCreator = (theme) => {
 
 export const setLanguageActionCreator = (language) => {
   return { type: globalActions.SET_LANGUAGE, payload: language };
-};
-
-export const getRoles = () => (dispatch) => {
-  axiosInstance
-    .get("/roles")
-    .then((res) => {
-      dispatch(setRolesActionCreator(res.data));
-    })
-    .catch((err) => console.log(err));
 };

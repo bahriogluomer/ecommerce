@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { useHistory } from "react-router";
 import { axiosInstance } from "../axios/axiosInstance";
 import { useDispatch, useSelector } from "react-redux";
-import { getRoles } from "../store/actions/globalActions";
+import { setRolesActionCreator } from "../store/actions/globalActions";
 
 const initialForm = {
   name: "",
@@ -42,12 +42,16 @@ export default function SignUpPage() {
   const [submitting, setSubmitting] = useState(false);
   const history = useHistory();
 
-  //API call for fetching roles
-  useEffect(() => {
-    dispatch(getRoles());
-  }, []);
-
   const role = watch("role_id");
+
+  useEffect(() => {
+    axiosInstance
+      .get("/roles")
+      .then((res) => {
+        dispatch(setRolesActionCreator(res.data));
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   function onFormSubmit(formData) {
     // If not 'store', delete the store related fields from the data object
