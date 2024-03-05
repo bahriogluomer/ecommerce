@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { useHistory } from "react-router";
 import { axiosInstance } from "../axios/axiosInstance";
 import { useDispatch, useSelector } from "react-redux";
-import { setRolesActionCreator } from "../store/actions/globalActions";
+import { getRoles } from "../store/actions/globalActions";
 
 const initialForm = {
   name: "",
@@ -45,12 +45,7 @@ export default function SignUpPage() {
   const role = watch("role_id");
 
   useEffect(() => {
-    axiosInstance
-      .get("/roles")
-      .then((res) => {
-        dispatch(setRolesActionCreator(res.data));
-      })
-      .catch((err) => console.log(err));
+    dispatch(getRoles());
   }, []);
 
   function onFormSubmit(formData) {
@@ -93,6 +88,7 @@ export default function SignUpPage() {
           Name
         </label>
         <input
+          placeholder="Enter your name"
           type="text"
           {...register("name", {
             required:
@@ -114,6 +110,7 @@ export default function SignUpPage() {
           E-mail
         </label>
         <input
+          placeholder="Enter your email"
           type="email"
           {...register("email", {
             required: "Email is required.",
@@ -129,6 +126,7 @@ export default function SignUpPage() {
           Password
         </label>
         <input
+          placeholder="Enter your password"
           type="password"
           {...register("password", {
             required: "Password is required.",
@@ -156,6 +154,7 @@ export default function SignUpPage() {
           Confirm Password
         </label>
         <input
+          placeholder="Confirm password"
           type="password"
           {...register("confirm_password", {
             required: true,
@@ -197,6 +196,7 @@ export default function SignUpPage() {
               Store Name
             </label>
             <input
+              placeholder="Enter store name"
               type="text"
               {...register("store.name", {
                 required: true,
@@ -223,6 +223,7 @@ export default function SignUpPage() {
               Store Phone Number
             </label>
             <input
+              placeholder="Enter phone number"
               type="text"
               {...register("store.phone", {
                 required: true,
@@ -241,6 +242,7 @@ export default function SignUpPage() {
               Tax No
             </label>
             <input
+              placeholder="Enter tax number"
               type="text"
               {...register("store.tax_no", {
                 required:
@@ -264,6 +266,7 @@ export default function SignUpPage() {
               IBAN
             </label>
             <input
+              placeholder="Enter IBAN"
               type="text"
               {...register("store.bank_account", {
                 required: "IBAN is required.",

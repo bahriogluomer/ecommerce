@@ -1,6 +1,6 @@
 import { Switch, Route } from "react-router-dom";
 import HomePage from "../pages/HomePage";
-import ProductListPage from "../pages/ProductListPage";
+import ShoppingPage from "../pages/ShoppingPage";
 import AboutPage from "../pages/AboutPage";
 import TeamPage from "../pages/TeamPage";
 import ContactPage from "../pages/ContactPage";
@@ -16,8 +16,8 @@ export default function PageBody() {
         <Route path="/" exact>
           <HomePage />
         </Route>
-        <Route path="/products">
-          <ProductListPage />
+        <Route path="/shopping">
+          <ShoppingPage />
         </Route>
         <Route path="/about">
           <AboutPage />

@@ -1,17 +1,28 @@
+import { axiosInstance } from "../../axios/axiosInstance";
 import { globalActions } from "../reducers/globalReducer";
 
-export const setRolesActionCreator = (roles) => {
+export const setRoles = (roles) => {
   return { type: globalActions.SET_ROLES, payload: roles };
 };
 
-export const setCategoriesActionCreator = (categories) => {
+export const setCategories = (categories) => {
   return { type: globalActions.SET_CATEGORIES, payload: categories };
 };
 
-export const setThemeActionCreator = (theme) => {
+export const setTheme = (theme) => {
   return { type: globalActions.SET_THEME, payload: theme };
 };
 
-export const setLanguageActionCreator = (language) => {
+export const setLanguage = (language) => {
   return { type: globalActions.SET_LANGUAGE, payload: language };
+};
+
+//getRoles thunk action
+export const getRoles = () => (dispatch) => {
+  axiosInstance
+    .get("/roles")
+    .then((res) => {
+      dispatch(setRoles(res.data));
+    })
+    .catch((err) => console.log(err));
 };

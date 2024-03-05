@@ -11,7 +11,7 @@ import { useState } from "react";
 import ProductCard from "../components/ProductCard";
 import BrandsBanner from "../components/BrandsBanner";
 
-export default function ProductListPage() {
+export default function ShoppingPage() {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -20,10 +20,10 @@ export default function ProductListPage() {
   return (
     <div>
       <section className="bg-lightgray1">
-        <div className="m-auto max-w-[1440px] flex flex-col py-8">
-          <div className="justify-between flex">
+        <div className="m-auto flex flex-col py-8 px-8">
+          <div className="flex justify-between px-2">
             <h3 className="font-bold text-2xl text-dark-text-color">Shop</h3>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 pr-2">
               <p className="font-bold text-sm text-dark-text-color ">Home</p>
               <FontAwesomeIcon
                 icon={faChevronRight}
@@ -42,7 +42,7 @@ export default function ProductListPage() {
               key={index}
               backgroundImage={category.backgroundImage}
               title={category.title}
-              count={category.count}
+              rating={category.count}
             />
           ))}
         </div>

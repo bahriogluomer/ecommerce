@@ -6,10 +6,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import {
   faBars,
-  faCartShopping,
   faEnvelope,
-  faHeart,
-  faMagnifyingGlass,
   faPhone,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
@@ -18,8 +15,9 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import Gravatar from "react-gravatar";
-import { logOutActionCreator } from "../store/actions/userActions";
+import { logOut } from "../store/actions/userActions";
 import { toast } from "react-toastify";
+import { Icon } from "@iconify/react";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -30,8 +28,8 @@ const Header = () => {
     setIsOpen(!isOpen);
   };
 
-  const logout = () => {
-    dispatch(logOutActionCreator());
+  const logoutHandler = () => {
+    dispatch(logOut());
     localStorage.removeItem("token");
     toast.success("Logged out successfully");
   };
@@ -89,7 +87,7 @@ const Header = () => {
         </div>
       </div>
       <div className="flex items-center justify-between gap-4 px-8 py-4 lg:gap-0 md:px-6">
-        <nav className="flex items-center gap-4 px-6 md:px-1 md:gap-1">
+        <nav className="flex items-center gap-4 px-2 md:gap-1">
           <div>
             <h3 className="text-2xl font-bold sm:text-xl text-darkgray">
               Bandage
@@ -99,7 +97,7 @@ const Header = () => {
             <NavLink to="/" exact>
               Home
             </NavLink>
-            <NavLink to="/products" exact>
+            <NavLink to="/shopping" exact>
               Shop
             </NavLink>
             <NavLink to="/about" exact>
@@ -120,10 +118,12 @@ const Header = () => {
           <div className="flex justify-end items-center text-sm text-primary gap-4 lg:gap-2">
             {user ? (
               <div className="flex font-bold text-secondary items-center justify-center gap-4 mr-2 lg:gap-2 md:hidden">
-                <div className="text-nowrap">Welcome {user.name}!</div>
+                <p className="text-nowrap text-primary font-semibold">
+                  Welcome {user.name}!
+                </p>
                 <div className="flex items-center justify-center">
-                  {/* temporarily put logout function here until modal is implemented */}
-                  <button onClick={logout}>
+                  {/* temporarily put logoutHandler function here until modal is implemented */}
+                  <button onClick={logoutHandler}>
                     <Gravatar
                       email={user.email}
                       className="min-w-6 min-h-6 max-w-8 max-h-8 rounded-full"
@@ -144,16 +144,16 @@ const Header = () => {
               </div>
             )}
             <div className="flex gap-4 items-center lg:gap-2 md:text-darkgray">
-              <FontAwesomeIcon icon={faMagnifyingGlass} size="lg" />
-              <FontAwesomeIcon icon={faCartShopping} size="lg" />
+              <Icon icon="bi:search" className="text-xl" />
+              <Icon icon="bi:cart" className="text-xl" />
               <span>1</span>
-              <FontAwesomeIcon icon={faHeart} size="lg" />
+              <Icon icon="ph:heart-light" className="text-2xl" />
               <span>1</span>
             </div>
           </div>
           <div className="flex gap-4">
             {/* temporarily put logout function here until modal is implemented */}
-            <button onClick={logout}>
+            <button onClick={logoutHandler}>
               <Gravatar
                 email={user?.email}
                 className="w-6 h-6 rounded-full hidden md:block"
@@ -177,7 +177,7 @@ const Header = () => {
               <NavLink to="/" exact>
                 Home
               </NavLink>
-              <NavLink to="/products" exact>
+              <NavLink to="/shopping" exact>
                 Shop
               </NavLink>
               <NavLink to="/about" exact>

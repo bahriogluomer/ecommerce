@@ -1,11 +1,9 @@
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
 import { useHistory } from "react-router";
 import { FaSpinner } from "react-icons/fa";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { setUserActionCreator } from "../store/actions/userActions";
-import { axiosInstance } from "../axios/axiosInstance";
+import { login } from "../store/actions/userActions";
 
 const initialForm = {
   email: "",
@@ -23,26 +21,10 @@ export default function LoginPage() {
   });
   const dispatch = useDispatch();
   const [submitting, setSubmitting] = useState(false);
-
   const history = useHistory();
 
   function onFormSubmit(formData) {
-    setSubmitting(true);
-    axiosInstance
-      .post("/login", formData)
-      .then((res) => {
-        console.log("status:", res.status, "response data:", res.data);
-        localStorage.setItem("token", res.data.token);
-        dispatch(setUserActionCreator(res.data));
-        toast.success("Login successfull! Redirecting you to home page.");
-        setSubmitting(false);
-        history.push("/");
-      })
-      .catch((err) => {
-        console.log(err);
-        toast.error(`Login failed. ${err.message}`);
-        setSubmitting(false);
-      });
+    dispatch(login(formData, history, setSubmitting));
   }
 
   return (

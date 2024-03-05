@@ -144,7 +144,7 @@ export default function AboutPage() {
       </section>
       <section
         id="brands-banner"
-        className="bg-lightgray1 max-w-[1440px] m-auto flex items-center justify-center"
+        className="bg-lightgray1 m-auto flex items-center justify-center"
       >
         <BrandsBanner />
       </section>

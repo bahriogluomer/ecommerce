@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
+import shophero1 from "../assets/shophero1.png";
 
 function Carousel() {
   const slides = [
     {
-      url: "https://s3-alpha-sig.figma.com/img/96c8/6912/d491d421800e62998b9af7c838cc25d1?Expires=1708905600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=PRuUc3UIlSQoQBzawEvKVIaDO-bdIxTuCT9souvziDah9LtJd4JxB-XMFy0xKdTXO6~XjZSFvNqXUHIAmRzzr4ldZJ-HMo1BIBJpO1scWbh1vEyhlYCepin4Bf1XAYJglBdY6VL9Oms5DCDEZbWA1Nogef2n~qgQGnon2yxRIF7Hpq0wl65VaAbfATTaI9Cb4N0ma-Wa3Raljf7OLN2YqHSniOGKi91Fqoan3Rf~ZBymGlnsQ9-wtSJRGLcqJ3heEYwoC1nT~KLWRtvNE-ITcKeIstII6amWNaGg1WsWfB3looJacBL2W0uZ~W-6zsHJmd84ibq6KW1kk7XNv5cnqw__",
+      url: shophero1,
     },
     {
       url: "https://images.unsplash.com/photo-1523381294911-8d3cead13475?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -28,6 +29,14 @@ function Carousel() {
     setCurrentIndex(slideIndex);
   };
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [currentIndex]);
+
   return (
     <div className="h-[960px] w-full relative flex">
       <div
@@ -38,7 +47,6 @@ function Carousel() {
           backgroundPosition: "center",
           width: "100%",
           height: "100%",
-          display: "block",
         }}
         className="duration-500 relative"
       >
@@ -63,7 +71,7 @@ function Carousel() {
       <div className="absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl p-2  text-white/80 hover:text-white cursor-pointer sm:scale-75">
         <BsChevronCompactRight onClick={nextSlide} size={80} />
       </div>
-      <div className="flex absolute bottom-4 right-0 left-0 justify-center py-2 gap-1 sm:scale-75">
+      <div className="flex absolute bottom-4 right-0 left-0 justify-center py-2 gap-0.5 sm:scale-75">
         {slides.map((slide, slideIndex) => (
           <div
             key={slideIndex}
