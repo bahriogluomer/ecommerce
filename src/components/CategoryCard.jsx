@@ -1,11 +1,11 @@
 import { NavLink } from "react-router-dom";
 
 export default function CategoryCard(props) {
-  const { backgroundImage, title, rating, gender, code } = props;
+  const { backgroundImage, title, rating, gender } = props;
   return (
     <>
       <NavLink
-        to={`/shopping/${gender}/${code}`}
+        to={`/shopping/${gender}/${title}`}
         className="w-52 h-56 flex flex-col justify-center items-center"
         style={{
           backgroundImage: `url(${backgroundImage})`,

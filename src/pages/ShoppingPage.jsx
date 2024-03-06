@@ -24,6 +24,7 @@ export default function ShoppingPage() {
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
+
   return (
     <div>
       <section className="bg-lightgray1">
@@ -51,7 +52,6 @@ export default function ShoppingPage() {
               title={category.title}
               rating={category.rating}
               gender={category.gender}
-              code={category.code}
             />
           ))}
         </div>
