@@ -33,7 +33,6 @@ const Header = () => {
   const toggleDropdown = () => {
     setIsDropDownOpen(!isDropDownOpen);
   };
-  console.log("isDropDownOpen fired", isDropDownOpen);
 
   let dropDownRef = useRef();
 
