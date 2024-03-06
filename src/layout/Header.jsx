@@ -6,12 +6,13 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import {
   faBars,
+  faChevronDown,
   faEnvelope,
   faPhone,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import Gravatar from "react-gravatar";
@@ -22,17 +23,42 @@ import { Icon } from "@iconify/react";
 const Header = () => {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
+  const [isDropDownOpen, setIsDropDownOpen] = useState(false);
   const user = useSelector((store) => store.user.userData);
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
   };
 
+  const toggleDropdown = () => {
+    setIsDropDownOpen(!isDropDownOpen);
+  };
+  console.log("isDropDownOpen fired", isDropDownOpen);
+
+  let dropDownRef = useRef();
+
+  useEffect(() => {
+    let handler = (e) => {
+      if (dropDownRef.current && !dropDownRef.current.contains(e.target)) {
+        setIsDropDownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
+
   const logoutHandler = () => {
     dispatch(logOut());
     localStorage.removeItem("token");
     toast.success("Logged out successfully");
   };
+
+  const categories = useSelector((store) => store.global.categories);
+  const mens = categories.filter((c) => c.gender === "e");
+  const womens = categories.filter((c) => c.gender === "k");
 
   return (
     <header className="">
@@ -97,9 +123,47 @@ const Header = () => {
             <NavLink to="/" exact>
               Home
             </NavLink>
-            <NavLink to="/shopping" exact>
-              Shop
-            </NavLink>
+            <div id="drop-down-menu">
+              <button
+                onClick={toggleDropdown}
+                className="text-secondary focus:outline-none flex items-center flex-nowrap"
+              >
+                Shop <FontAwesomeIcon icon={faChevronDown} />
+              </button>
+              {isDropDownOpen && (
+                <div
+                  ref={dropDownRef}
+                  className="flex items-start justify-center gap-1 absolute mt-2 w-64 p-10 bg-white shadow-lg rounded-md z-10"
+                >
+                  <div className="flex flex-col text-center">
+                    <h3>Erkek</h3>
+                    {mens.map((c, id) => (
+                      <NavLink
+                        onClick={() => setIsDropDownOpen(false)}
+                        to={`/shopping/${c.gender}/${c.code}`}
+                        className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                        key={id}
+                      >
+                        {c.title}
+                      </NavLink>
+                    ))}
+                  </div>
+                  <div className="flex flex-col text-center">
+                    <h3>Kadın</h3>
+                    {womens.map((c, id) => (
+                      <NavLink
+                        onClick={() => setIsDropDownOpen(false)}
+                        to={`/shopping/${c.gender}/${c.code}`}
+                        className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                        key={id}
+                      >
+                        {c.title}
+                      </NavLink>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
             <NavLink to="/about" exact>
               About
             </NavLink>
@@ -173,13 +237,52 @@ const Header = () => {
       {isOpen && (
         <div className="hidden flex-col items-center justify-center my-10 md:flex">
           <nav className="flex w-full items-center justify-center">
-            <div className="flex flex-col w-full font-bold gap-4 text-secondary text-center m-auto">
+            <div className="flex flex-col items-center justify-center w-full font-bold gap-4 text-secondary text-center m-auto">
               <NavLink to="/" exact>
                 Home
               </NavLink>
-              <NavLink to="/shopping" exact>
-                Shop
-              </NavLink>
+              <div id="drop-down-menu">
+                <button
+                  onClick={toggleDropdown}
+                  className="text-secondary focus:outline-none flex items-center flex-nowrap"
+                >
+                  Shop <FontAwesomeIcon icon={faChevronDown} />
+                </button>
+                {isDropDownOpen && (
+                  <div
+                    ref={dropDownRef}
+                    id="category-drop-down-menu"
+                    className="flex items-start justify-center gap-1 absolute top-38 right-28 mt-2 w-64 p-10 bg-white shadow-lg rounded-md z-10"
+                  >
+                    <div className="flex flex-col text-center">
+                      <h3>Erkek</h3>
+                      {mens.map((c, id) => (
+                        <NavLink
+                          onClick={toggleDropdown}
+                          to={`/shopping/${c.gender}/${c.code}`}
+                          className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                          key={id}
+                        >
+                          {c.title}
+                        </NavLink>
+                      ))}
+                    </div>
+                    <div className="flex flex-col text-center">
+                      <h3>Kadın</h3>
+                      {womens.map((c, id) => (
+                        <NavLink
+                          onClick={toggleDropdown}
+                          to={`/shopping/${c.gender}/${c.code}`}
+                          className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                          key={id}
+                        >
+                          {c.title}
+                        </NavLink>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
               <NavLink to="/about" exact>
                 About
               </NavLink>

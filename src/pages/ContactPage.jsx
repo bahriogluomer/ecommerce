@@ -52,7 +52,7 @@ export default function ContactPage() {
             />
           </div>
         </div>
-        <div className="sm:w-[380px] sm:h-[440px]">
+        <div className="sm:max-w-[380px] sm:h-[440px]">
           <img src={contactheroimg} alt="" />
         </div>
       </section>

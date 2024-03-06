@@ -3,6 +3,7 @@ import Main from "./layout/Main";
 import { useDispatch, useSelector } from "react-redux";
 import { autoLogin } from "./store/actions/userActions";
 import { toast } from "react-toastify";
+import { getCategories } from "./store/actions/globalActions";
 
 function App() {
   const dispatch = useDispatch();
@@ -17,6 +18,10 @@ function App() {
   useEffect(() => {
     dispatch(autoLogin());
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getCategories());
+  }, []);
 
   return (
     <>
