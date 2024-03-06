@@ -108,7 +108,7 @@ export default function ShoppingPage() {
         </div>
       </section>
       <section id="products">
-        <div className="mx-auto max-w-[1440px] flex flex-wrap items-start content-start gap-9 px-6 py-12 sm:content-center sm:justify-center">
+        <div className="mx-auto max-w-[1440px] flex flex-wrap items-start content-start gap-6 p-6">
           {productData.map((product, index) => (
             <ProductCard
               key={index}
