@@ -56,8 +56,8 @@ export default function ShoppingPage() {
           ))}
         </div>
       </section>
-      <section className="m-auto max-w-[1440px] p-12">
-        <div className="flex justify-between flex-wrap items-center sm:flex-col">
+      <section>
+        <div className="m-auto max-w-[1440px] p-6 flex justify-between flex-wrap items-center sm:flex-col">
           <h6 className="font-bold text-base text-secondary">
             Showing all 12 results
           </h6>
@@ -107,8 +107,8 @@ export default function ShoppingPage() {
           </div>
         </div>
       </section>
-      <section id="products" className="mx-auto max-w-[1440px]">
-        <div className="flex flex-wrap items-start content-start gap-9 px-36 py-12 sm:content-center sm:justify-center">
+      <section id="products">
+        <div className="mx-auto max-w-[1440px] flex flex-wrap items-start content-start gap-9 px-6 py-12 sm:content-center sm:justify-center">
           {productData.map((product, index) => (
             <ProductCard
               key={index}

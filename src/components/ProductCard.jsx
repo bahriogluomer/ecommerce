@@ -5,7 +5,7 @@ export default function ProductCard(props) {
   const { img, title, category, oldPrice, newPrice } = props;
   return (
     <div className="flex flex-col items-center m-auto bg-white">
-      <img className="min-w-[239px] min-h-[280px]" src={img} />
+      <img className="min-w-[239px] min-h-[300px]" src={img} />
       <div className="flex flex-col gap-3 items-center pt-6  pb-9">
         <h5 className="font-bold text-base text-[#252B42]">{title}</h5>
         <p className="font-bold text-sm text-[#737373]">{category}</p>
