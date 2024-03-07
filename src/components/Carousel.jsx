@@ -45,8 +45,10 @@ function Carousel() {
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
-          width: "100%",
+          objectFit: "cover",
+          minWidth: "100%",
           height: "100%",
+          transition: "background-image 0.5s ease-in-out",
         }}
         className="duration-500 relative"
       >
