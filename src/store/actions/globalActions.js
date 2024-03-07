@@ -26,3 +26,12 @@ export const getRoles = () => (dispatch) => {
     })
     .catch((err) => console.log(err));
 };
+
+export const getCategories = () => (dispatch) => {
+  axiosInstance
+    .get("/categories")
+    .then((res) => {
+      dispatch(setCategories(res.data));
+    })
+    .catch((err) => console.log(err));
+};

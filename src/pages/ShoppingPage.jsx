@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CategoryCard from "../components/CategoryCard";
-import { categoryData, productData } from "../data";
+import { productData } from "../data";
 import {
   faChevronDown,
   faChevronRight,
@@ -10,13 +10,21 @@ import {
 import { useState } from "react";
 import ProductCard from "../components/ProductCard";
 import BrandsBanner from "../components/BrandsBanner";
+import { useSelector } from "react-redux";
 
 export default function ShoppingPage() {
   const [isOpen, setIsOpen] = useState(false);
 
+  const categories = useSelector((store) => store.global.categories);
+
+  const topRatedCategories = categories
+    .sort((a, b) => b.rating - a.rating)
+    .slice(0, 5);
+
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
+
   return (
     <div>
       <section className="bg-lightgray1">
@@ -36,19 +44,20 @@ export default function ShoppingPage() {
         </div>
       </section>
       <section id="categories" className="bg-lightgray1  ">
-        <div className="mx-auto max-w-[1440px] p-6 flex justify-between items-center sm:flex-col sm:items-center sm:gap-2">
-          {categoryData.map((category, index) => (
+        <div className="mx-auto max-w-[1440px] p-6 flex justify-between items-center sm:flex-col sm:justify-center sm:items-center sm:gap-2">
+          {topRatedCategories.map((category, id) => (
             <CategoryCard
-              key={index}
-              backgroundImage={category.backgroundImage}
+              key={id}
+              backgroundImage={category.img}
               title={category.title}
-              rating={category.count}
+              rating={category.rating}
+              gender={category.gender}
             />
           ))}
         </div>
       </section>
-      <section className="m-auto max-w-[1440px] p-12">
-        <div className="flex justify-between flex-wrap items-center sm:flex-col">
+      <section>
+        <div className="m-auto max-w-[1440px] p-6 flex justify-between flex-wrap items-center sm:flex-col">
           <h6 className="font-bold text-base text-secondary">
             Showing all 12 results
           </h6>
@@ -99,7 +108,7 @@ export default function ShoppingPage() {
         </div>
       </section>
       <section id="products">
-        <div className="mx-auto max-w-[1440px] flex flex-wrap items-start content-start gap-9 px-36 py-12 sm:content-center sm:justify-center">
+        <div className="mx-auto max-w-[1440px] flex flex-wrap items-start content-start gap-6 p-6">
           {productData.map((product, index) => (
             <ProductCard
               key={index}
