@@ -1,28 +1,104 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CategoryCard from "../components/CategoryCard";
-import { productData } from "../data";
 import {
-  faChevronDown,
   faChevronRight,
   faListCheck,
   faTableCellsLarge,
 } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { FaSpinner } from "react-icons/fa";
+import { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
 import BrandsBanner from "../components/BrandsBanner";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../store/actions/productActions";
+
+import { useHistory, useLocation, useParams } from "react-router";
 
 export default function ShoppingPage() {
-  const [isOpen, setIsOpen] = useState(false);
+  const { genderParams, categoryParams } = useParams();
+  console.log("gender:", genderParams, " category:", categoryParams);
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const location = useLocation();
 
   const categories = useSelector((store) => store.global.categories);
+  const products = useSelector((store) => store.product.productList);
+  const totalProductCount = useSelector(
+    (store) => store.product.totalProductCount
+  );
+  const fetchState = useSelector((store) => store.product.fetchState);
 
   const topRatedCategories = categories
     .sort((a, b) => b.rating - a.rating)
     .slice(0, 5);
 
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
+  const [sort, setSort] = useState("");
+  const [filter, setFilter] = useState("");
+  const [category, setCategory] = useState("");
+
+  function replaceTurkishCharacters(text) {
+    return text
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/ı/g, "i")
+      .replace(/ö/g, "o")
+      .replace(/ş/g, "s");
+  }
+
+  useEffect(() => {
+    for (const cat of categories) {
+      if (genderParams) {
+        if (
+          genderParams + ":" + replaceTurkishCharacters(categoryParams) ==
+          cat.code
+        ) {
+          console.log(
+            genderParams + ":" + replaceTurkishCharacters(categoryParams)
+          );
+          setCategory(cat.id);
+          console.log("category:", cat.id);
+          break;
+        }
+      }
+    }
+  }, [genderParams, categoryParams, categories]);
+
+  console.log("replaced:", replaceTurkishCharacters(categoryParams));
+
+  useEffect(() => {
+    if (genderParams) {
+      dispatch(fetchProducts(filter, sort, category));
+      history.push(
+        location.pathname +
+          "?" +
+          (filter ? "filter=" + filter + "&" : "") +
+          (sort ? "sort=" + sort + "&" : "") +
+          (category ? "category=" + category : "")
+      );
+      console.log("category from fetch products", category);
+    } else {
+      dispatch(fetchProducts());
+    }
+  }, [category]);
+
+  console.log("category", category);
+
+  const handleFilter = () => {
+    dispatch(fetchProducts(filter, sort, category));
+    history.push(
+      location.pathname +
+        "?" +
+        (filter ? "filter=" + filter + "&" : "") +
+        (sort ? "sort=" + sort + "&" : "") +
+        (category ? "category=" + category : "")
+    );
+  };
+
+  // console.log("current filter:", filter);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleFilter();
   };
 
   return (
@@ -57,9 +133,9 @@ export default function ShoppingPage() {
         </div>
       </section>
       <section>
-        <div className="m-auto max-w-[1440px] p-6 flex justify-between flex-wrap items-center sm:flex-col">
+        <div className="m-auto max-w-[1440px] p-6 flex justify-between flex-wrap items-center sm:flex-col sm:gap-2">
           <h6 className="font-bold text-base text-secondary">
-            Showing all 12 results
+            Showing all {totalProductCount} results
           </h6>
           <div className="flex items-center gap-3">
             <h6 className="font-bold text-base text-secondary">Views:</h6>
@@ -70,56 +146,100 @@ export default function ShoppingPage() {
               <FontAwesomeIcon icon={faListCheck} size="lg" />
             </button>
           </div>
-          <div className="flex gap-4">
-            <div id="drop-down-menu" className="">
-              <button
-                onClick={toggleDropdown}
-                className="bg-lightgray1 text-secondary border rounded-md focus:outline-none px-6 py-2.5"
+          <div>
+            <form
+              onSubmit={handleSubmit}
+              className="flex flex-wrap gap-4 items-center justify-center"
+            >
+              <select
+                name="category"
+                className="w-56 border rounded-md bg-lightgray1 focus:outline-none px-6 py-2.5"
+                onChange={(e) => setCategory(e.target.value)}
+                defaultValue=""
               >
-                Popularity <FontAwesomeIcon icon={faChevronDown} />
+                <option disabled value="">
+                  Select Category
+                </option>
+                {categories.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.code}
+                  </option>
+                ))}
+              </select>
+              <input
+                type="text"
+                placeholder="Search"
+                name="filter"
+                onChange={(e) => setFilter(e.target.value)}
+                className="w-56 border rounded-md bg-lightgray1 focus:outline-none px-6 py-2.5"
+              />
+              <select
+                name="sort"
+                defaultValue="sort"
+                className="w-56 px-6 py-2.5 bg-lightgray1 border rounded-md focus:outline-none"
+                onChange={(e) => setSort(e.target.value)}
+              >
+                <option disabled value="sort">
+                  Sort
+                </option>
+                <option
+                  value="price:asc"
+                  className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                >
+                  Price Ascending
+                </option>
+                <option
+                  value="price:desc"
+                  className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                >
+                  Price Descending
+                </option>
+                <option
+                  value="rating:asc"
+                  className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                >
+                  Rating Ascending
+                </option>
+                <option
+                  value="rating:desc"
+                  className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                >
+                  Rating Descending
+                </option>
+              </select>
+              <button className="bg-primary font-semibold px-6 py-2.5 text-white rounded-md ">
+                Filter
               </button>
-              {isOpen && (
-                <div className="absolute mt-2 w-48 bg-white shadow-lg rounded-md z-10">
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-                  >
-                    Item 1
-                  </a>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-                  >
-                    Item 2
-                  </a>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-                  >
-                    Item 3
-                  </a>
-                </div>
-              )}
-            </div>
-            <button className="bg-primary font-semibold px-6 py-2.5 text-white rounded-md ">
-              Filter
-            </button>
+            </form>
           </div>
         </div>
       </section>
       <section id="products">
-        <div className="mx-auto max-w-[1440px] flex flex-wrap items-start content-start gap-6 p-6">
-          {productData.map((product, index) => (
-            <ProductCard
-              key={index}
-              img={product.img}
-              title={product.title}
-              category={product.category}
-              oldPrice={product.oldPrice}
-              newPrice={product.newPrice}
-            />
-          ))}
-        </div>
+        {fetchState === "loading" ? (
+          <div className="flex items-center justify-center h-screen text-secondary">
+            <FaSpinner className="animate-spin mr-2 text-4xl" />
+            Loading...
+          </div>
+        ) : products.length > 0 ? (
+          <div className="mx-auto max-w-[1440px] flex flex-wrap items-start content-start gap-6">
+            {products.map((product, id) => (
+              <ProductCard
+                key={id}
+                img={product.images[0].url}
+                title={product.name}
+                description={product.description}
+                stock={product.stock}
+                price={product.price}
+                rating={product.rating}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="flex items-center justify-center text-secondary">
+            No Products Found
+          </div>
+        )}
+
         <div
           id="pagination-placeholder"
           className="text-primary font-semibold flex items-center justify-center m-8"

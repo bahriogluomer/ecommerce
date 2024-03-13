@@ -21,8 +21,8 @@ const data = [
 export default function AboutPage() {
   return (
     <>
-      <section className="m-auto max-w-[1440px] flex justify-between sm:flex-col sm:items-center">
-        <div className="flex flex-col items-start gap-9 justify-center w-96 sm:text-center sm:items-center">
+      <section className="mx-auto mt-10 max-w-[1440px] flex justify-between sm:flex-col sm:items-center">
+        <div className="flex flex-col items-start gap-9 justify-center w-96 sm:text-center sm:items-center sm:w-64">
           <h5 className="font-bold text-base text-dark-text-color sm:hidden">
             ABOUT COMPANY
           </h5>
@@ -36,7 +36,7 @@ export default function AboutPage() {
             Get Quote Now
           </button>
         </div>
-        <div className="sm:w-[387px] sm:h-[440px]">
+        <div className="sm:w-[300px] sm:h-[440px]">
           <img src={aboutuspic} alt="" />
         </div>
       </section>
