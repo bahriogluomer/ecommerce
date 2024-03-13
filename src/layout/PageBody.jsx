@@ -16,7 +16,7 @@ export default function PageBody() {
         <Route path="/" exact>
           <HomePage />
         </Route>
-        <Route path="/shopping">
+        <Route path="/shopping/:genderParams?/:categoryParams?">
           <ShoppingPage />
         </Route>
         <Route path="/about">

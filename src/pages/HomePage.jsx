@@ -5,11 +5,24 @@ import edit2 from "../assets/edit2.png";
 import edit3 from "../assets/edit3.png";
 import edit4 from "../assets/edit4.png";
 import couple from "../assets/couple.png";
-import { productData, postData } from "../data";
+import { postData } from "../data";
 import ProductCard from "../components/ProductCard";
 import PostCard from "../components/PostCard";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../store/actions/productActions";
 
 export default function HomePage() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, []);
+
+  const products = useSelector((store) => store.product.productList);
+
+  const bestSellerProducts = products
+    .sort((a, b) => b.rating - a.rating)
+    .slice(0, 8);
   return (
     <>
       <section className="w-full">
@@ -80,14 +93,15 @@ export default function HomePage() {
           </p>
         </div>
         <div className="mx-auto max-w-[1440px] flex flex-wrap items-start content-start gap-9 px-36 py-12 sm:items-center sm:justify-center">
-          {productData.map((product, index) => (
+          {bestSellerProducts.map((product, id) => (
             <ProductCard
-              key={index}
-              img={product.img}
-              title={product.title}
-              category={product.category}
-              oldPrice={product.oldPrice}
-              newPrice={product.newPrice}
+              key={id}
+              img={product.images[0].url}
+              title={product.name}
+              description={product.description}
+              stock={product.stock}
+              price={product.price}
+              rating={product.rating}
             />
           ))}
         </div>

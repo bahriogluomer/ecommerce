@@ -139,7 +139,7 @@ const Header = () => {
                     {mens.map((c, id) => (
                       <NavLink
                         onClick={() => setIsDropDownOpen(false)}
-                        to={`/shopping/${c.gender}/${c.title}`}
+                        to={`/shopping/${c.gender}/${c.title.toLowerCase()}`}
                         className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
                         key={id}
                       >
@@ -152,7 +152,7 @@ const Header = () => {
                     {womens.map((c, id) => (
                       <NavLink
                         onClick={() => setIsDropDownOpen(false)}
-                        to={`/shopping/${c.gender}/${c.title}`}
+                        to={`/shopping/${c.gender}/${c.title.toLowerCase()}`}
                         className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
                         key={id}
                       >

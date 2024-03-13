@@ -1,17 +1,29 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircle } from "@fortawesome/free-solid-svg-icons";
+import { faCircle, faStar } from "@fortawesome/free-solid-svg-icons";
 
 export default function ProductCard(props) {
-  const { img, title, category, oldPrice, newPrice } = props;
+  const { img, title, description, stock, price, rating } = props;
   return (
-    <div className="flex flex-col items-center m-auto w-[240px] bg-white">
-      <img className="min-w-[239px] min-h-[300px]" src={img} />
-      <div className="flex flex-col gap-3 items-center pt-6  pb-9">
+    <div className="flex flex-col items-center m-auto w-[240px] h-[624px] bg-white border border-[#E7E7E7] shadow-sm relative">
+      <div className="absolute top-2 left-1 flex font-semibold bg-darkgray bg-opacity-75 text-white text-xs px-2 py-1 rounded-full gap-1">
+        <FontAwesomeIcon className="w-fit text-yellow-400" icon={faStar} />
+        {rating}
+      </div>
+      <img className="min-w-[238px] h-[300px]" src={img} />
+      <div className="flex flex-col gap-3 items-center pt-6 pb-9 px-2">
         <h5 className="font-bold text-base text-[#252B42]">{title}</h5>
-        <p className="font-bold text-sm text-[#737373]">{category}</p>
+        <div className="flex flex-col justify-center text-center h-24">
+          <p
+            className="font-bold text-sm text-secondary 
+        "
+          >
+            {description}
+          </p>
+        </div>
+
         <div className="flex gap-3">
-          <h5 className="font-bold text-base text-[#BDBDBD]">{oldPrice}</h5>
-          <h5 className="font-bold text-base text-[#23856D]">{newPrice}</h5>
+          <h5 className="font-bold text-base text-[#BDBDBD]">Stock: {stock}</h5>
+          <h5 className="font-bold text-base text-[#23856D]">$ {price}</h5>
         </div>
         <div className="flex gap-2">
           <button>
@@ -25,6 +37,11 @@ export default function ProductCard(props) {
           </button>
           <button>
             <FontAwesomeIcon className="w-fit text-[#252B42]" icon={faCircle} />
+          </button>
+        </div>
+        <div>
+          <button className="w-full bg-white font-semibold px-6 py-2.5 text-primary rounded-full border border-primary">
+            Learn More
           </button>
         </div>
       </div>

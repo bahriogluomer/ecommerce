@@ -5,7 +5,7 @@ export default function CategoryCard(props) {
   return (
     <>
       <NavLink
-        to={`/shopping/${gender}/${title}`}
+        to={`/shopping/${gender}/${title.toLowerCase()}`}
         className="w-52 h-56 flex flex-col justify-center items-center"
         style={{
           backgroundImage: `url(${backgroundImage})`,
@@ -14,6 +14,9 @@ export default function CategoryCard(props) {
         }}
       >
         <div className="h-full w-full flex flex-col items-center justify-center">
+          <p className="font-bold text-white text-base">
+            {title === "Elbise" ? null : gender === "k" ? "Kadın" : "Erkek"}
+          </p>
           <p className="font-bold text-white text-base">{title}</p>
 
           <p className="font-medium text-white text-base">{rating}</p>

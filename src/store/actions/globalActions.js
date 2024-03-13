@@ -18,8 +18,8 @@ export const setLanguage = (language) => {
 };
 
 //getRoles thunk action
-export const getRoles = () => (dispatch) => {
-  axiosInstance
+export const getRoles = () => async (dispatch) => {
+  await axiosInstance
     .get("/roles")
     .then((res) => {
       dispatch(setRoles(res.data));
@@ -27,8 +27,8 @@ export const getRoles = () => (dispatch) => {
     .catch((err) => console.log(err));
 };
 
-export const getCategories = () => (dispatch) => {
-  axiosInstance
+export const getCategories = () => async (dispatch) => {
+  await axiosInstance
     .get("/categories")
     .then((res) => {
       dispatch(setCategories(res.data));

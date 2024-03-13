@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import shophero1 from "../assets/shophero1.png";
+import { useHistory } from "react-router";
 
 function Carousel() {
   const slides = [
@@ -37,6 +38,8 @@ function Carousel() {
     return () => clearInterval(interval);
   }, [currentIndex]);
 
+  const history = useHistory();
+
   return (
     <div className="h-[960px] w-full relative flex">
       <div
@@ -62,7 +65,10 @@ function Carousel() {
           <p className="md:text-start text-xl text-white w-96 sm:w-72 sm:text-center">
             We know how large objects will act, but things on a small scale.
           </p>
-          <button className="w-fit font-bold rounded-md text-2xl text-nowrap sm:scale-75 text-white bg-green-500 py-3.5 px-10">
+          <button
+            onClick={() => history.push("/shopping")}
+            className="w-fit font-bold rounded-md text-2xl text-nowrap sm:scale-75 text-white bg-green-500 py-3.5 px-10"
+          >
             SHOP NOW
           </button>
         </div>
