@@ -10,9 +10,13 @@ import { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
 import BrandsBanner from "../components/BrandsBanner";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../store/actions/productActions";
-
+import {
+  fetchMoreProducts,
+  fetchProducts,
+  setPageCount,
+} from "../store/actions/productActions";
 import { useHistory, useLocation, useParams } from "react-router";
+import BackToTopButton from "../components/BackToTopButton";
 
 export default function ShoppingPage() {
   const { genderParams, categoryParams } = useParams();
@@ -35,6 +39,12 @@ export default function ShoppingPage() {
   const [sort, setSort] = useState("");
   const [filter, setFilter] = useState("");
   const [category, setCategory] = useState("");
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [showBackToTop, setShowBackToTop] = useState(false);
+
+  const limit = 25;
+  const offset = (page - 1) * limit;
 
   function replaceTurkishCharacters(text) {
     return text
@@ -63,34 +73,94 @@ export default function ShoppingPage() {
     }
   }, [genderParams, categoryParams, categories]);
 
-  console.log("replaced:", replaceTurkishCharacters(categoryParams));
+  // console.log("replaced:", replaceTurkishCharacters(categoryParams));
+
+  function debounce(func, wait) {
+    let timeout;
+    return function executedFunction() {
+      const later = () => {
+        timeout = null;
+        func();
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  }
+
+  const handleScrollForBackToTop = () => {
+    const scrollY = window.scrollY;
+
+    if (scrollY > 300) {
+      setShowBackToTop(true);
+    } else {
+      setShowBackToTop(false);
+    }
+  };
 
   useEffect(() => {
-    if (genderParams) {
-      dispatch(fetchProducts(filter, sort, category));
+    window.addEventListener("scroll", handleScrollForBackToTop);
+    return () => {
+      window.removeEventListener("scroll", handleScrollForBackToTop);
+    };
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  });
+
+  const handleScroll = debounce(() => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop + 1 >=
+      document.documentElement.scrollHeight
+    ) {
+      setHasMore(true);
+      setPage((prev) => prev + 1);
+      dispatch(fetchMoreProducts(filter, sort, category, page, limit, offset));
+      if (page * limit >= totalProductCount) {
+        setHasMore(false);
+      }
       history.push(
         location.pathname +
           "?" +
           (filter ? "filter=" + filter + "&" : "") +
           (sort ? "sort=" + sort + "&" : "") +
-          (category ? "category=" + category : "")
+          (category ? "category=" + category : "") +
+          (page ? "&page=" + page : "")
       );
-      console.log("category from fetch products", category);
-    } else {
-      dispatch(fetchProducts());
     }
-  }, [category]);
+  }, 300);
 
-  console.log("category", category);
-
-  const handleFilter = () => {
-    dispatch(fetchProducts(filter, sort, category));
+  useEffect(() => {
+    dispatch(fetchProducts(filter, sort, category, page, limit, offset));
+    setPage(1);
+    dispatch(setPageCount(Math.ceil(totalProductCount / limit)));
+    // dispatch(updateProductList(products));
     history.push(
       location.pathname +
         "?" +
         (filter ? "filter=" + filter + "&" : "") +
         (sort ? "sort=" + sort + "&" : "") +
-        (category ? "category=" + category : "")
+        (category ? "category=" + category : "") +
+        (page ? "&page=" + page : "")
+    );
+    console.log("category from fetch products", category);
+  }, [category]);
+
+  // console.log("category", category);
+
+  const handleFilter = () => {
+    dispatch(fetchProducts(filter, sort, category, page, limit));
+    history.push(
+      location.pathname +
+        "?" +
+        (filter ? "filter=" + filter + "&" : "") +
+        (sort ? "sort=" + sort + "&" : "") +
+        (category ? "category=" + category : "") +
+        (page ? "&page=" + page : "")
     );
   };
 
@@ -98,11 +168,13 @@ export default function ShoppingPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setPage(1);
     handleFilter();
   };
 
   return (
     <div>
+      {showBackToTop && <BackToTopButton />}
       <section className="bg-lightgray1">
         <div className="m-auto flex flex-col py-8 px-8">
           <div className="flex justify-between px-2">
@@ -221,7 +293,7 @@ export default function ShoppingPage() {
             Loading...
           </div>
         ) : products.length > 0 ? (
-          <div className="mx-auto max-w-[1440px] flex flex-wrap items-start content-start gap-6">
+          <div className="mx-auto max-w-[1440px] flex flex-wrap items-start content-start gap-6 my-20">
             {products.map((product, id) => (
               <ProductCard
                 key={id}
@@ -239,17 +311,15 @@ export default function ShoppingPage() {
             No Products Found
           </div>
         )}
-
-        <div
-          id="pagination-placeholder"
-          className="text-primary font-semibold flex items-center justify-center m-8"
-        >
-          <button className="border rounded-l-md px-4 py-6">First</button>
-          <span className="text-center px-4 py-6 border">1</span>
-          <span className="text-center px-4 py-6 border">2</span>
-          <span className="text-center px-4 py-6 border">3</span>
-          <button className="border rounded-r-md px-4 py-6">Next</button>
-        </div>
+        {fetchState === "loading more products" && (
+          <div className="flex items-center justify-center h-16 my-10 text-secondary">
+            <FaSpinner className="animate-spin mr-2 text-4xl" />
+            Loading...
+          </div>
+        )}
+        {hasMore == false && (
+          <div className="text-center my-10">You have reached the end</div>
+        )}
       </section>
       <section
         id="brands-banner"

@@ -5,6 +5,10 @@ export const setProductList = (productList) => {
   return { type: productActions.SET_PRODUCT_LIST, payload: productList };
 };
 
+export const updateProductList = (productList) => {
+  return { type: productActions.UPDATE_PRODUCT_LIST, payload: productList };
+};
+
 export const setTotalProductCount = (ProductCount) => {
   return {
     type: productActions.SET_TOTAL_PRODUCT_COUNT,
@@ -25,20 +29,46 @@ export const setFetchState = (fetchState) => {
 };
 
 export const fetchProducts =
-  (filter, sort, category, limit, page) => async (dispatch) => {
+  (filter, sort, category, page, limit, offset) => async (dispatch) => {
     dispatch(setFetchState("loading"));
 
     await axiosInstance
       .get(
         `/products?${filter ? "filter=" + filter : ""}${
           sort ? `&sort=${sort}` : ""
-        }${category ? `&category=${category}` : ""}`
+        }${category ? `&category=${category}` : ""}${
+          page ? `&page=${page}` : ""
+        }${limit ? `&limit=${limit}` : ""}${offset ? `&offset=${offset}` : ""}`
       )
       .then((res) => {
         dispatch(setProductList(res.data["products"]));
         dispatch(setTotalProductCount(res.data["total"]));
         dispatch(setFetchState("success"));
-        console.log("filterfromfetch:", filter);
+        // console.log("filterfromfetch:", filter);
+      })
+      .catch((err) => {
+        dispatch(setFetchState("error"));
+        console.log(err);
+      });
+  };
+
+export const fetchMoreProducts =
+  (filter, sort, category, page, limit, offset) => async (dispatch) => {
+    dispatch(setFetchState("loading more products"));
+
+    await axiosInstance
+      .get(
+        `/products?${filter ? "filter=" + filter : ""}${
+          sort ? `&sort=${sort}` : ""
+        }${category ? `&category=${category}` : ""}${
+          page ? `&page=${page}` : ""
+        }${limit ? `&limit=${limit}` : ""}${offset ? `&offset=${offset}` : ""}`
+      )
+      .then((res) => {
+        dispatch(updateProductList(res.data["products"]));
+        dispatch(setTotalProductCount(res.data["total"]));
+        console.log("fetched more products", res.data["products"]);
+        dispatch(setFetchState("success"));
       })
       .catch((err) => {
         dispatch(setFetchState("error"));

@@ -1,5 +1,6 @@
 export const productActions = {
   SET_PRODUCT_LIST: "SET_PRODUCT_LIST",
+  UPDATE_PRODUCT_LIST: "UPDATE_PRODUCT_LIST",
   SET_TOTAL_PRODUCT_COUNT: "SET_TOTAL_PRODUCT_COUNT",
   SET_PAGE_COUNT: "SET_PAGE_COUNT",
   SET_ACTIVE_PAGE: "SET_ACTIVE_PAGE",
@@ -18,6 +19,11 @@ export const productReducer = (state = initialState, action) => {
   switch (action.type) {
     case productActions.SET_PRODUCT_LIST:
       return { ...state, productList: action.payload };
+    case productActions.UPDATE_PRODUCT_LIST:
+      return {
+        ...state,
+        productList: [...state.productList, ...action.payload],
+      };
     case productActions.SET_TOTAL_PRODUCT_COUNT:
       return { ...state, totalProductCount: action.payload };
     case productActions.SET_PAGE_COUNT:
