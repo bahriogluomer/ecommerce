@@ -16,6 +16,13 @@ export const setTotalProductCount = (ProductCount) => {
   };
 };
 
+export const setSelectedProduct = (selectedProduct) => {
+  return {
+    type: productActions.SET_SELECTED_PRODUCT,
+    payload: selectedProduct,
+  };
+};
+
 export const setPageCount = (pageCount) => {
   return { type: productActions.SET_PAGE_COUNT, payload: pageCount };
 };
@@ -44,6 +51,7 @@ export const fetchProducts =
         dispatch(setProductList(res.data["products"]));
         dispatch(setTotalProductCount(res.data["total"]));
         dispatch(setFetchState("success"));
+
         // console.log("filterfromfetch:", filter);
       })
       .catch((err) => {
@@ -75,3 +83,16 @@ export const fetchMoreProducts =
         console.log(err);
       });
   };
+
+export const fetchProductById = (id) => async (dispatch) => {
+  console.log("fetching product by id: ", id);
+  dispatch(setFetchState("loading single product"));
+  await axiosInstance
+    .get(`/products/${id}`)
+    .then((res) => {
+      dispatch(setSelectedProduct(res.data));
+      console.log("single product", res.data);
+      dispatch(setFetchState("success"));
+    })
+    .catch((err) => console.log(err));
+};

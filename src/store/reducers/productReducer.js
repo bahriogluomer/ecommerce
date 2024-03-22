@@ -1,5 +1,6 @@
 export const productActions = {
   SET_PRODUCT_LIST: "SET_PRODUCT_LIST",
+  SET_SELECTED_PRODUCT: "SET_SELECTED_PRODUCT",
   UPDATE_PRODUCT_LIST: "UPDATE_PRODUCT_LIST",
   SET_TOTAL_PRODUCT_COUNT: "SET_TOTAL_PRODUCT_COUNT",
   SET_PAGE_COUNT: "SET_PAGE_COUNT",
@@ -13,6 +14,7 @@ const initialState = {
   pageCount: 0,
   activePage: 0,
   fetchState: "",
+  selectedProduct: {},
 };
 
 export const productReducer = (state = initialState, action) => {
@@ -32,6 +34,8 @@ export const productReducer = (state = initialState, action) => {
       return { ...state, activePage: action.payload };
     case productActions.SET_FETCH_STATE:
       return { ...state, fetchState: action.payload };
+    case productActions.SET_SELECTED_PRODUCT:
+      return { ...state, selectedProduct: action.payload };
     default:
       return state;
   }

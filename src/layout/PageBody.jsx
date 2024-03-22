@@ -28,14 +28,14 @@ export default function PageBody() {
         <Route path="/contact">
           <ContactPage />
         </Route>
-        <Route path="/product">
-          <ProductDetailPage />
-        </Route>
         <Route path="/signup">
           <SignUpPage />
         </Route>
         <Route path="/login">
           <LoginPage />
+        </Route>
+        <Route path="/:category?/:productId?/:productNameSlug?">
+          <ProductDetailPage />
         </Route>
         <Route path="*">
           <ErrorPage />
