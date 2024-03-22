@@ -1,8 +1,29 @@
+/* eslint-disable react/prop-types */
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircle, faStar } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { useSelector } from "react-redux";
 
 export default function ProductCard(props) {
-  const { img, title, description, stock, price, rating } = props;
+  const { img, title, description, stock, price, rating, id, name, category } =
+    props;
+
+  const categories = useSelector((store) => store.global.categories);
+
+  let link = "/";
+
+  for (const ctg of categories) {
+    if (category === ctg.id) {
+      link +=
+        ctg.code.slice(2) +
+        "/" +
+        id +
+        "/" +
+        name.toLowerCase().trim().replaceAll(" ", "-");
+      break;
+    }
+  }
+
   return (
     <div className="flex flex-col items-center m-auto w-[240px] h-[624px] bg-white border border-[#E7E7E7] shadow-sm relative">
       <div className="absolute top-2 left-1 flex font-semibold bg-darkgray bg-opacity-75 text-white text-xs px-2 py-1 rounded-full gap-1">
@@ -40,9 +61,11 @@ export default function ProductCard(props) {
           </button>
         </div>
         <div>
-          <button className="w-full bg-white font-semibold px-6 py-2.5 text-primary rounded-full border border-primary">
-            Learn More
-          </button>
+          <Link to={link}>
+            <button className="w-full bg-white font-semibold px-6 py-2.5 text-primary rounded-full border border-primary">
+              Learn More
+            </button>
+          </Link>
         </div>
       </div>
     </div>

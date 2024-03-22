@@ -71,7 +71,7 @@ export default function ShoppingPage() {
         }
       }
     }
-  }, [genderParams, categoryParams, categories]);
+  }, [genderParams, categoryParams, categories, category]);
 
   // console.log("replaced:", replaceTurkishCharacters(categoryParams));
 
@@ -117,7 +117,11 @@ export default function ShoppingPage() {
       window.innerHeight + document.documentElement.scrollTop + 1 >=
       document.documentElement.scrollHeight
     ) {
+      if (setHasMore === false) {
+        return;
+      }
       setHasMore(true);
+
       setPage((prev) => prev + 1);
       dispatch(fetchMoreProducts(filter, sort, category, page, limit, offset));
       if (page * limit >= totalProductCount) {
@@ -303,6 +307,9 @@ export default function ShoppingPage() {
                 stock={product.stock}
                 price={product.price}
                 rating={product.rating}
+                id={product.id}
+                name={product.name}
+                category={product.category_id}
               />
             ))}
           </div>

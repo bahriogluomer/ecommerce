@@ -102,6 +102,9 @@ export default function HomePage() {
               stock={product.stock}
               price={product.price}
               rating={product.rating}
+              id={product.id}
+              name={product.name}
+              category={product.category_id}
             />
           ))}
         </div>
