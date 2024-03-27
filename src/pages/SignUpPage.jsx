@@ -295,6 +295,12 @@ export default function SignUpPage() {
           </div>
         </button>
       </form>
+      <button
+        className="text-secondary mt-6"
+        onClick={() => history.push("/login")}
+      >
+        Already have an account? Click to login.
+      </button>
     </div>
   );
 }
