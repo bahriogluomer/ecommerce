@@ -28,7 +28,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center my-20">
+    <div className="flex flex-col items-center justify-center my-24">
       <h1 className="font-bold text-2xl text-center text-darkgray my-12">
         Login
       </h1>
@@ -75,6 +75,12 @@ export default function LoginPage() {
           </div>
         </button>
       </form>
+      <button
+        className="text-secondary mt-6"
+        onClick={() => history.push("/signup")}
+      >
+        Don't have an account? Click to sign up.
+      </button>
     </div>
   );
 }
