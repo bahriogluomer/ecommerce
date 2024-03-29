@@ -19,6 +19,12 @@ import Gravatar from "react-gravatar";
 import { logOut } from "../store/actions/userActions";
 import { toast } from "react-toastify";
 import { Icon } from "@iconify/react";
+import {
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle,
+} from "reactstrap";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -58,6 +64,8 @@ const Header = () => {
   const categories = useSelector((store) => store.global.categories);
   const mens = categories.filter((c) => c.gender === "e");
   const womens = categories.filter((c) => c.gender === "k");
+
+  const cart = useSelector((store) => store.shoppingCart.cart);
 
   return (
     <header className="">
@@ -206,10 +214,12 @@ const Header = () => {
                 </NavLink>
               </div>
             )}
-            <div className="flex gap-4 items-center lg:gap-2 md:text-darkgray">
+            <div className="flex gap-4 items-center lg:gap-2 md:text-darkgray text-lg justify-center">
               <Icon icon="bi:search" className="text-xl" />
-              <Icon icon="bi:cart" className="text-xl" />
-              <span>1</span>
+              <button>
+                <Icon icon="bi:cart" className="text-xl" />
+              </button>
+              <span>{cart.length ? cart.length : 0}</span>
               <Icon icon="ph:heart-light" className="text-2xl" />
               <span>1</span>
             </div>

@@ -1,7 +1,19 @@
 import { shoppingCartActions } from "../reducers/shoppingCartReducer";
 
-export const setCart = (cart) => {
-  return { type: shoppingCartActions.SET_CART, payload: cart };
+export const addToCart = (data) => {
+  return { type: shoppingCartActions.ADD_TO_CART, payload: data };
+};
+
+export const removeFromCart = (data) => {
+  return { type: shoppingCartActions.REMOVE_FROM_CART, payload: data };
+};
+
+export const deleteFromCart = (data) => {
+  return { type: shoppingCartActions.DELETE_FROM_CART, payload: data };
+};
+
+export const cleanCart = () => {
+  return { type: shoppingCartActions.CLEAN_CART };
 };
 
 export const setPayment = (payment) => {

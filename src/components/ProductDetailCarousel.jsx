@@ -46,7 +46,7 @@ function ProductDetailCarousel({ images }) {
               </div>
               {images && images.length > 0 && (
                 <img
-                  className="w-[360px] h-[420px] "
+                  className="w-[332px] h-[400px] "
                   src={images[currentIndex].url}
                   alt=""
                 />

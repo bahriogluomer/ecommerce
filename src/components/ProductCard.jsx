@@ -2,13 +2,16 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircle, faStar } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Icon } from "@iconify/react";
+import { addToCart } from "../store/actions/shoppingCartActions";
 
 export default function ProductCard(props) {
-  const { img, title, description, stock, price, rating, id, name, category } =
+  const { id, img, title, description, stock, price, rating, name, category } =
     props;
 
   const categories = useSelector((store) => store.global.categories);
+  const dispatch = useDispatch();
 
   let link = "/";
 
@@ -23,6 +26,10 @@ export default function ProductCard(props) {
       break;
     }
   }
+
+  const handleCart = () => {
+    dispatch(addToCart(props));
+  };
 
   return (
     <div className="flex flex-col items-center m-auto w-[240px] h-[624px] bg-white border border-[#E7E7E7] shadow-sm relative">
@@ -60,12 +67,18 @@ export default function ProductCard(props) {
             <FontAwesomeIcon className="w-fit text-[#252B42]" icon={faCircle} />
           </button>
         </div>
-        <div>
+        <div className="flex gap-2">
           <Link to={link}>
             <button className="w-full bg-white font-semibold px-6 py-2.5 text-primary rounded-full border border-primary">
               Learn More
             </button>
           </Link>
+          <button
+            onClick={handleCart}
+            className="border rounded-full border-primary  text-primary p-4"
+          >
+            <Icon icon="bi:cart" className="text-xl" />
+          </button>
         </div>
       </div>
     </div>
