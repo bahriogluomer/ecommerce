@@ -36,13 +36,6 @@ export default function ProductDetailPage() {
     .sort((a, b) => b.rating - a.rating)
     .slice(0, 8);
 
-  //   <button
-  //   className="font-bold text-sm text-darkgray"
-  //   onClick={() => history.back()}
-  // >
-  //   Back
-  // </button>
-
   return (
     (fetchState == "loading single product" && (
       <div className="flex items-center justify-center h-screen text-secondary">
@@ -168,7 +161,7 @@ export default function ProductDetailPage() {
           <div className="flex flex-wrap content-center items-center justify-around sm:justify-center sm:gap-8 py-12">
             {product.images && product.images.length > 0 && (
               <img
-                className="w-[332px] h-[400px]"
+                className="min-w-[330px] h-[400px] object-cover"
                 src={product.images[0].url}
                 alt=""
               />
