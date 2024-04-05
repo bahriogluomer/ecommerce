@@ -19,21 +19,22 @@ import Gravatar from "react-gravatar";
 import { logOut } from "../store/actions/userActions";
 import { toast } from "react-toastify";
 import { Icon } from "@iconify/react";
-import {
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownToggle,
-} from "reactstrap";
 
+//TODO : Make Cart dropdown and map cart items
 const Header = () => {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
   const user = useSelector((store) => store.user.userData);
+  const cart = useSelector((store) => store.shoppingCart.cart);
+  const total = useSelector((store) => store.shoppingCart.cartTotal);
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
+  };
+  const toggleCart = () => {
+    setIsCartOpen(!isCartOpen);
   };
 
   const toggleDropdown = () => {
@@ -42,12 +43,20 @@ const Header = () => {
 
   let dropDownRef = useRef();
 
+  let cartRef = useRef();
+
   useEffect(() => {
-    let handler = (e) => {
-      if (dropDownRef.current && !dropDownRef.current.contains(e.target)) {
-        setIsDropDownOpen(false);
+    const handler = (e) => {
+      if (
+        [dropDownRef.current, cartRef.current].some((ref) =>
+          ref?.contains(e.target)
+        )
+      ) {
+        return;
       }
+      setIsDropDownOpen(false);
     };
+
     document.addEventListener("mousedown", handler);
 
     return () => {
@@ -64,8 +73,6 @@ const Header = () => {
   const categories = useSelector((store) => store.global.categories);
   const mens = categories.filter((c) => c.gender === "e");
   const womens = categories.filter((c) => c.gender === "k");
-
-  const cart = useSelector((store) => store.shoppingCart.cart);
 
   return (
     <header className="">
@@ -216,10 +223,62 @@ const Header = () => {
             )}
             <div className="flex gap-4 items-center lg:gap-2 md:text-darkgray text-lg justify-center">
               <Icon icon="bi:search" className="text-xl" />
-              <button>
+              <button onClick={toggleCart}>
                 <Icon icon="bi:cart" className="text-xl" />
               </button>
               <span>{cart.length ? cart.length : 0}</span>
+              {isCartOpen && (
+                <>
+                  <div
+                    ref={cartRef}
+                    className="flex flex-col items-center top-24 right-10 gap-6 absolute mt-2 p-10 bg-white shadow-lg rounded-md z-10 sm:top-10 sm:right-0 xs:w-[280px]"
+                  >
+                    <div className="flex flex-col text-center justify-center gap-2 w-[440px] sm:w-[320px] text-darkgray">
+                      <div className="flex flex-col items-start">
+                        <p>Cart ({cart.length} items)</p>
+                      </div>
+                      {cart.map((c, index) => (
+                        <div className="flex flex-col" key={index}>
+                          <div
+                            className={`flex items-center justify-between bg-${
+                              index % 2 === 0 ? "darkgray" : "white"
+                            } bg-opacity-15`}
+                          >
+                            <div className="flex gap-4">
+                              <img
+                                className="w-16 h-16"
+                                src={c.product.img}
+                                alt="img"
+                              />
+                              <div className="flex flex-col items-start">
+                                <p className="font-semibold text-nowrap">
+                                  {c.product.title}
+                                </p>
+                                <p>{c.count} in cart</p>
+                              </div>
+                            </div>
+                            <div className="font-semibold mr-2">
+                              ${c.product.price * c.count}
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    <hr className="w-full text-secondary" />
+                    <div className="text-darkgray flex justify-end w-full font-semibold mr-2">
+                      <p>Total: ${total}</p>
+                    </div>
+                    <div className="flex gap-10 justify-between w-full sm:flex-col sm:gap-4">
+                      <button className="w-48 bg-primary text-white font-semibold px-6 py-2.5 rounded-md sm:w-full">
+                        Checkout
+                      </button>
+                      <button className=" bg-white font-semibold w-48 px-6 py-2.5 text-primary rounded-md border border-primary sm:w-full">
+                        Go to cart
+                      </button>
+                    </div>
+                  </div>
+                </>
+              )}
               <Icon icon="ph:heart-light" className="text-2xl" />
               <span>1</span>
             </div>

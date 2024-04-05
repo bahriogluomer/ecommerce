@@ -16,6 +16,7 @@ import { fetchProductById } from "../store/actions/productActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { FaSpinner } from "react-icons/fa";
+import { addToCart } from "../store/actions/shoppingCartActions";
 
 export default function ProductDetailPage() {
   const dispatch = useDispatch();
@@ -35,6 +36,10 @@ export default function ProductDetailPage() {
   const bestSellerProducts = products
     .sort((a, b) => b.rating - a.rating)
     .slice(0, 8);
+
+  const handleCart = () => {
+    dispatch(addToCart(product));
+  };
 
   return (
     (fetchState == "loading single product" && (
@@ -136,7 +141,10 @@ export default function ProductDetailPage() {
                 <button className="bg-white rounded-full w-10 h-10 border border-gray-500">
                   <FontAwesomeIcon icon={faHeart} />
                 </button>
-                <button className="bg-white rounded-full w-10 h-10 border border-gray-500">
+                <button
+                  onClick={handleCart}
+                  className="bg-white rounded-full w-10 h-10 border border-gray-500"
+                >
                   <FontAwesomeIcon icon={faCartShopping} />
                 </button>
                 <button className="bg-white rounded-full w-10 h-10 border border-gray-500">
