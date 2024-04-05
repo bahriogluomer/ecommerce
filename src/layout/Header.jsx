@@ -30,7 +30,6 @@ const Header = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const user = useSelector((store) => store.user.userData);
   const cart = useSelector((store) => store.shoppingCart.cart);
-  const total = useSelector((store) => store.shoppingCart.cartTotal);
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
@@ -268,7 +267,13 @@ const Header = () => {
                     </div>
                     <hr className="w-full text-secondary" />
                     <div className="text-darkgray flex justify-end w-full font-semibold mr-2">
-                      <p>Total: ${total}</p>
+                      <p>
+                        Total: $
+                        {cart.reduce(
+                          (a, b) => a + b.product.price * b.count,
+                          0
+                        )}
+                      </p>
                     </div>
                     <div className="flex gap-10 justify-between w-full sm:flex-col sm:gap-4">
                       <button className="w-48 bg-primary text-white font-semibold px-6 py-2.5 rounded-md sm:w-full">

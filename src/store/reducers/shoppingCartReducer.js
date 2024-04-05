@@ -71,18 +71,21 @@ export const shoppingCartReducer = (state = initialState, action) => {
           break;
         }
       }
+
       return { ...state, cart: [...currentCart] };
 
     case shoppingCartActions.DELETE_FROM_CART:
       for (let i = 0; i < currentCart.length; i++) {
         if (action.payload.id === currentCart[i].product.id) {
           currentCart.splice(i, 1);
-          break;
         }
+
+        break;
       }
       return { ...state, cart: [...currentCart] };
 
     case shoppingCartActions.CLEAN_CART:
+      state.cartTotal = 0;
       return { ...state, cart: [] };
 
     case shoppingCartActions.TOGGLE_CHECKBOX:

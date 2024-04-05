@@ -12,6 +12,10 @@ export const deleteFromCart = (data) => {
   return { type: shoppingCartActions.DELETE_FROM_CART, payload: data };
 };
 
+export const toggleCheckbox = (data) => {
+  return { type: shoppingCartActions.TOGGLE_CHECKBOX, payload: data };
+};
+
 export const cleanCart = () => {
   return { type: shoppingCartActions.CLEAN_CART };
 };
