@@ -314,7 +314,7 @@ export default function ShoppingPage() {
             ))}
           </div>
         ) : (
-          <div className="flex items-center justify-center text-secondary">
+          <div className="flex items-center justify-center text-secondary my-52 md:my-36">
             No Products Found
           </div>
         )}

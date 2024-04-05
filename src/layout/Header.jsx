@@ -19,10 +19,12 @@ import Gravatar from "react-gravatar";
 import { logOut } from "../store/actions/userActions";
 import { toast } from "react-toastify";
 import { Icon } from "@iconify/react";
+import { useHistory } from "react-router";
 
 //TODO : Make Cart dropdown and map cart items
 const Header = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [isOpen, setIsOpen] = useState(false);
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -272,7 +274,13 @@ const Header = () => {
                       <button className="w-48 bg-primary text-white font-semibold px-6 py-2.5 rounded-md sm:w-full">
                         Checkout
                       </button>
-                      <button className=" bg-white font-semibold w-48 px-6 py-2.5 text-primary rounded-md border border-primary sm:w-full">
+                      <button
+                        onClick={() => {
+                          history.push("/cart");
+                          toggleCart();
+                        }}
+                        className=" bg-white font-semibold w-48 px-6 py-2.5 text-primary rounded-md border border-primary sm:w-full"
+                      >
                         Go to cart
                       </button>
                     </div>

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { useDispatch, useSelector } from "react-redux";
 import { Icon } from "@iconify/react";
 import { addToCart } from "../store/actions/shoppingCartActions";
+import { toast } from "react-toastify";
 
 export default function ProductCard(props) {
   const { id, img, title, description, stock, price, rating, name, category } =
@@ -29,6 +30,7 @@ export default function ProductCard(props) {
 
   const handleCart = () => {
     dispatch(addToCart(props));
+    toast.success("Product added to cart");
   };
 
   return (
