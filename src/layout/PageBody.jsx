@@ -8,6 +8,7 @@ import ProductDetailPage from "../pages/ProductDetailPage";
 import SignUpPage from "../pages/SignUpPage";
 import ErrorPage from "../pages/ErrorPage";
 import LoginPage from "../pages/LoginPage";
+import CartPage from "../pages/CartPage";
 
 export default function PageBody() {
   return (
@@ -15,6 +16,9 @@ export default function PageBody() {
       <Switch>
         <Route path="/" exact>
           <HomePage />
+        </Route>
+        <Route path="/cart">
+          <CartPage />
         </Route>
         <Route path="/shopping/:genderParams?/:categoryParams?">
           <ShoppingPage />

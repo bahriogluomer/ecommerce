@@ -19,16 +19,17 @@ import Gravatar from "react-gravatar";
 import { logOut } from "../store/actions/userActions";
 import { toast } from "react-toastify";
 import { Icon } from "@iconify/react";
+import { useHistory } from "react-router";
 
 //TODO : Make Cart dropdown and map cart items
 const Header = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [isOpen, setIsOpen] = useState(false);
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const user = useSelector((store) => store.user.userData);
   const cart = useSelector((store) => store.shoppingCart.cart);
-  const total = useSelector((store) => store.shoppingCart.cartTotal);
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
@@ -235,14 +236,16 @@ const Header = () => {
                   >
                     <div className="flex flex-col text-center justify-center gap-2 w-[440px] sm:w-[320px] text-darkgray">
                       <div className="flex flex-col items-start">
-                        <p>Cart ({cart.length} items)</p>
+                        <p className="font-semibold text-nowrap">
+                          Cart ({cart.reduce((a, b) => a + b.count, 0)} items)
+                        </p>
                       </div>
                       {cart.map((c, index) => (
                         <div className="flex flex-col" key={index}>
                           <div
                             className={`flex items-center justify-between bg-${
                               index % 2 === 0 ? "darkgray" : "white"
-                            } bg-opacity-15`}
+                            } bg-opacity-5`}
                           >
                             <div className="flex gap-4">
                               <img
@@ -258,7 +261,7 @@ const Header = () => {
                               </div>
                             </div>
                             <div className="font-semibold mr-2">
-                              ${c.product.price * c.count}
+                              ${(c.product.price * c.count).toFixed(2)}
                             </div>
                           </div>
                         </div>
@@ -266,16 +269,29 @@ const Header = () => {
                     </div>
                     <hr className="w-full text-secondary" />
                     <div className="text-darkgray flex justify-end w-full font-semibold mr-2">
-                      <p>Total: ${total}</p>
+                      <p>
+                        Total: $
+                        {cart
+                          .reduce((a, b) => a + b.product.price * b.count, 0)
+                          .toFixed(2)}
+                      </p>
                     </div>
-                    <div className="flex gap-10 justify-between w-full sm:flex-col sm:gap-4">
-                      <button className="w-48 bg-primary text-white font-semibold px-6 py-2.5 rounded-md sm:w-full">
-                        Checkout
-                      </button>
-                      <button className=" bg-white font-semibold w-48 px-6 py-2.5 text-primary rounded-md border border-primary sm:w-full">
-                        Go to cart
-                      </button>
-                    </div>
+                    {cart.length > 0 && (
+                      <div className="flex gap-10 justify-between w-full sm:flex-col sm:gap-4">
+                        <button className="w-48 bg-primary text-white font-semibold px-6 py-2.5 rounded-md sm:w-full">
+                          Checkout
+                        </button>
+                        <button
+                          onClick={() => {
+                            history.push("/cart");
+                            toggleCart();
+                          }}
+                          className=" bg-white font-semibold w-48 px-6 py-2.5 text-primary rounded-md border border-primary sm:w-full"
+                        >
+                          Go to cart
+                        </button>
+                      </div>
+                    )}
                   </div>
                 </>
               )}

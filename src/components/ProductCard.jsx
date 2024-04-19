@@ -5,6 +5,7 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { useDispatch, useSelector } from "react-redux";
 import { Icon } from "@iconify/react";
 import { addToCart } from "../store/actions/shoppingCartActions";
+import { toast } from "react-toastify";
 
 export default function ProductCard(props) {
   const { id, img, title, description, stock, price, rating, name, category } =
@@ -29,6 +30,10 @@ export default function ProductCard(props) {
 
   const handleCart = () => {
     dispatch(addToCart(props));
+    toast.success("Product added to cart", {
+      position: "top-left",
+      autoClose: 2000,
+    });
   };
 
   return (
@@ -69,13 +74,13 @@ export default function ProductCard(props) {
         </div>
         <div className="flex gap-2">
           <Link to={link}>
-            <button className="w-full bg-white font-semibold px-6 py-2.5 text-primary rounded-full border border-primary">
+            <button className="w-full bg-white font-semibold px-6 py-2.5 text-primary rounded-full border border-primary hover:bg-primary hover:text-white">
               Learn More
             </button>
           </Link>
           <button
             onClick={handleCart}
-            className="border rounded-full border-primary  text-primary p-4"
+            className="border rounded-full border-primary  text-primary p-4 hover:bg-primary hover:text-white"
           >
             <Icon icon="bi:cart" className="text-xl" />
           </button>
