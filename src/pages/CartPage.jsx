@@ -19,7 +19,11 @@ function CartPage() {
           cart.length === 0 ? "screen" : "full"
         } flex flex-col items-center justify-center max-w-[1440px] m-auto`}
       >
-        <div className="flex flex-col items-start justify-start mt-8 w-full">
+        <div
+          className={`flex flex-col items-${
+            cart.length === 0 ? "center" : "start"
+          } justify-start w-full`}
+        >
           {cart.length === 0 ? (
             <h2 className="text-3xl font-bold text-left">Cart is empty</h2>
           ) : (
@@ -29,7 +33,7 @@ function CartPage() {
           )}
         </div>
 
-        <div className="flex flex-col text-center justify-center gap-2 w-full text-darkgray mt-18 md:mt-4">
+        <div className="flex flex-col text-center justify-center gap-2 w-full text-darkgray  md:mt-4">
           {cart.map((c, index) => (
             <div className="flex flex-col" key={index}>
               <div
@@ -52,7 +56,7 @@ function CartPage() {
                     src={c.product.img}
                     alt="img"
                   />
-                  <div className="flex items-center justify-center gap-4 flex-1 sm:flex-col sm:gap-1">
+                  <div className="flex items-center justify-between gap-4 flex-1 md:flex-col sm:gap-1 w-[500px] md:w-[300px] sm:w-[200px] ml-4">
                     <p className="font-semibold text-nowrap">
                       {c.product.title}
                     </p>
