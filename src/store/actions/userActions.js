@@ -19,13 +19,19 @@ export const login = (formData, history, setSubmitting) => (dispatch) => {
       console.log("status:", res.status, "response data:", res.data);
       localStorage.setItem("token", res.data.token);
       dispatch(setUser(res.data));
-      toast.success("Login successfull! Redirecting you to home page.");
+      toast.success("Login successfull! Redirecting you to home page.", {
+        position: "top-left",
+        autoClose: 3000,
+      });
       history.push("/");
       setSubmitting(false);
     })
     .catch((err) => {
       console.log(err);
-      toast.error(`Login failed. ${err.message}`);
+      toast.error(`Login failed, wrong email or password.`, {
+        position: "top-left",
+        autoClose: 3000,
+      });
       setSubmitting(false);
     });
 };
