@@ -6,11 +6,11 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Main = () => {
   return (
-    <div className="font-montserrat w-full">
-      <ToastContainer />
+    <div className="flex flex-col justify-between font-montserrat w-full min-h-screen">
       <Header />
       <PageBody />
       <Footer />
+      <ToastContainer />
     </div>
   );
 };

@@ -28,7 +28,7 @@ const data = [
 
 export default function Footer() {
   return (
-    <footer className="flex flex-col">
+    <footer className="flex flex-col mt-auto">
       <div className=" bg-[#FAFAFA] p-12  ">
         <div className="mx-auto max-w-[1440px] flex items-center justify-between sm:flex-col sm: gap-4 sm:items-start">
           <h3 className="text-2xl font-bold">Bandage</h3>
