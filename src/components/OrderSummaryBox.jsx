@@ -3,10 +3,9 @@ import { useSelector } from "react-redux";
 export default function OrderSummaryBox() {
   const cart = useSelector((store) => store.shoppingCart.cart);
 
-  const totalProductPrice = cart.reduce(
-    (a, b) => a + b.count * b.product.price,
-    0
-  );
+  const totalProductPrice = cart
+    .filter((c) => c.checked)
+    .reduce((a, b) => a + b.count * b.product.price, 0);
   const shippingPrice = 20;
   const shippingDiscountLimit = 100;
 
