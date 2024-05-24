@@ -40,7 +40,7 @@ function CartPage() {
                     <div className="flex flex-col items-center justify-center">
                       <input
                         onClick={() => dispatch(toggleCheckbox(c.product))}
-                        className="w-5 h-5 rounded-md"
+                        className="w-5 h-5 rounded-md text-primary"
                         type="checkbox"
                         id={index}
                         defaultChecked
