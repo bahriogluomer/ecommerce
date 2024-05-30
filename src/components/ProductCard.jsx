@@ -74,13 +74,13 @@ export default function ProductCard(props) {
         </div>
         <div className="flex gap-2">
           <Link to={link}>
-            <button className="w-full bg-white font-semibold px-6 py-2.5 text-primary rounded-full border border-primary hover:bg-primary hover:text-white">
+            <button className="w-full bg-white font-semibold px-6 py-2.5 text-primary rounded-full border border-primary hover:bg-primary hover:bg-opacity-70 hover:text-white">
               Learn More
             </button>
           </Link>
           <button
             onClick={handleCart}
-            className="border rounded-full border-primary  text-primary p-4 hover:bg-primary hover:text-white"
+            className="border rounded-full border-primary  text-primary p-4 hover:bg-primary hover:bg-opacity-70 hover:text-white"
           >
             <Icon icon="bi:cart" className="text-xl" />
           </button>

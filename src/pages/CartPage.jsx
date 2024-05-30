@@ -34,7 +34,7 @@ function CartPage() {
                 <div
                   className={`flex items-center justify-around bg-${
                     index % 2 === 0 ? "darkgray" : "white"
-                  } bg-opacity-5 h-32 md:h-20`}
+                  } bg-opacity-5 h-28 md:h-20`}
                 >
                   <div className="flex flex-row gap-4 place-items-center">
                     <div className="flex flex-col items-center justify-center">
@@ -47,7 +47,7 @@ function CartPage() {
                       />
                     </div>
                     <img
-                      className="w-24 h-32 object-cover md:h-20 md:w-14"
+                      className="w-28 h-28 object-cover md:h-20 md:w-14"
                       src={c.product.img}
                       alt="img"
                     />
@@ -103,8 +103,6 @@ function CartPage() {
             </div>
           )}
         </div>
-
-        <hr className="max-w-[1440px] text-secondary my-6" />
       </div>
     </>
   );

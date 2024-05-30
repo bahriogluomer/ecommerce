@@ -6,14 +6,11 @@ export default function OrderSummaryBox() {
   const totalProductPrice = cart
     .filter((c) => c.checked)
     .reduce((a, b) => a + b.count * b.product.price, 0);
-  const shippingPrice = 20;
-  const shippingDiscountLimit = 100;
+  const shippingPrice = 20.0;
 
   const totalPrice = totalProductPrice + shippingPrice;
 
-  const subTotal =
-    totalPrice -
-    (totalProductPrice > shippingDiscountLimit ? shippingPrice : 0);
+  const subTotal = totalPrice - (totalProductPrice > 100 ? shippingPrice : 0);
 
   return (
     <>
@@ -22,22 +19,22 @@ export default function OrderSummaryBox() {
         <div className="flex flex-col gap-2 pt-4 text-secondary">
           <div className="flex justify-between">
             <p>Total Price</p>
-            <p>{totalProductPrice.toFixed(2)}$</p>
+            <p>${totalProductPrice.toFixed(2)}</p>
           </div>
           <div className="flex justify-between">
             <p>Shipping Price</p>
-            <p>{shippingPrice}$</p>
+            <p>${shippingPrice.toFixed(2)}</p>
           </div>
-          {totalProductPrice > shippingDiscountLimit && (
+          {totalProductPrice > 100 && (
             <div className="flex justify-between">
-              <p>Free shipping for orders above 100$</p>
-              <p className="text-primary">-{shippingPrice.toFixed(2)}$</p>
+              <p>Free Shipping For Orders Above $100</p>
+              <p className="text-green-500">-${shippingPrice.toFixed(2)}</p>
             </div>
           )}
         </div>
         <div className="text-xl pt-6 flex justify-between ">
           <p>Total</p>
-          <p className="text-primary">{subTotal.toFixed(2)}$</p>
+          <p className="text-primary">${subTotal.toFixed(2)}</p>
         </div>
       </div>
     </>
