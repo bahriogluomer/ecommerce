@@ -32,7 +32,8 @@
     "reactstrap": "^9.2.2",
     "redux": "^5.0.1",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^3.1.0"
+    "redux-thunk": "^3.1.0",
+    "turkey-neighbourhoods": "^4.0.3"
   },
   "devDependencies": {
     "@iconify/react": "^4.1.1",

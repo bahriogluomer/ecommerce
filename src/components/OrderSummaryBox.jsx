@@ -1,7 +1,9 @@
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function OrderSummaryBox() {
   const cart = useSelector((store) => store.shoppingCart.cart);
+  const history = useHistory();
 
   const totalProductPrice = cart
     .filter((c) => c.checked)
@@ -36,6 +38,12 @@ export default function OrderSummaryBox() {
           <p>Total</p>
           <p className="text-primary">${subTotal.toFixed(2)}</p>
         </div>
+        <button
+          onClick={() => history.push("/createOrder")}
+          className="w-full bg-primary text-white font-semibold px-6 py-2.5 rounded-md mt-4"
+        >
+          Checkout
+        </button>
       </div>
     </>
   );

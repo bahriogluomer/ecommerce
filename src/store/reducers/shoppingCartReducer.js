@@ -19,6 +19,7 @@ export const shoppingCartReducer = (state = initialState, action) => {
   let alreadyInCart = false;
   let currentCart = [...state.cart];
   let addedItem = { product: action.payload };
+  let found = false;
   let total = 0;
 
   switch (action.type) {
@@ -76,11 +77,10 @@ export const shoppingCartReducer = (state = initialState, action) => {
 
     case shoppingCartActions.DELETE_FROM_CART:
       for (let i = 0; i < currentCart.length; i++) {
-        if (action.payload.id === currentCart[i].product.id) {
+        if (action.payload.id === currentCart[i].product.id && !found) {
           currentCart.splice(i, 1);
+          found = true;
         }
-
-        break;
       }
       return { ...state, cart: [...currentCart] };
 

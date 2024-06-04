@@ -140,10 +140,11 @@ const Header = () => {
             </NavLink>
             <div id="drop-down-menu">
               <button
-                onClick={toggleDropdown}
+                onMouseEnter={toggleDropdown}
                 className="text-secondary focus:outline-none flex items-center flex-nowrap"
               >
-                Shop <FontAwesomeIcon icon={faChevronDown} />
+                Shop
+                <FontAwesomeIcon icon={faChevronDown} className="ml-1" />
               </button>
               {isDropDownOpen && (
                 <div
