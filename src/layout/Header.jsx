@@ -135,16 +135,19 @@ const Header = () => {
             </h3>
           </div>
           <div className="flex justify-around font-bold ml-20 gap-4 text-secondary text-sm m-auto lg:ml-0 lg:gap-2 md:hidden">
-            <NavLink to="/" exact>
+            <NavLink to="/" exact className="hover:text-darkgray">
               Home
             </NavLink>
             <div id="drop-down-menu">
               <button
                 onMouseEnter={toggleDropdown}
-                className="text-secondary focus:outline-none flex items-center flex-nowrap"
+                className="text-secondary focus:outline-none flex items-center flex-nowrap hover:text-darkgray"
               >
                 Shop
-                <FontAwesomeIcon icon={faChevronDown} className="ml-1" />
+                <FontAwesomeIcon
+                  icon={faChevronDown}
+                  className="ml-1 hover:text-darkgray"
+                />
               </button>
               {isDropDownOpen && (
                 <div
@@ -180,16 +183,16 @@ const Header = () => {
                 </div>
               )}
             </div>
-            <NavLink to="/about" exact>
+            <NavLink to="/about" exact className="hover:text-darkgray">
               About
             </NavLink>
-            <NavLink to="/" exact>
+            <NavLink to="/" exact className="hover:text-darkgray">
               Blog
             </NavLink>
-            <NavLink to="/contact" exact>
+            <NavLink to="/contact" exact className="hover:text-darkgray">
               Contact
             </NavLink>
-            <NavLink to="team" exact>
+            <NavLink to="team" exact className="hover:text-darkgray">
               Team
             </NavLink>
           </div>
@@ -323,13 +326,13 @@ const Header = () => {
         <div className="hidden flex-col items-center justify-center my-10 md:flex">
           <nav className="flex w-full items-center justify-center">
             <div className="flex flex-col items-center justify-center w-full font-bold gap-4 text-secondary text-center m-auto">
-              <NavLink to="/" exact>
+              <NavLink to="/" exact className="hover:text-darkgray">
                 Home
               </NavLink>
               <div id="drop-down-menu">
                 <button
                   onClick={toggleDropdown}
-                  className="text-secondary focus:outline-none flex items-center flex-nowrap"
+                  className="text-secondary focus:outline-none flex items-center flex-nowrap hover:text-darkgray"
                 >
                   Shop <FontAwesomeIcon icon={faChevronDown} />
                 </button>
@@ -368,16 +371,16 @@ const Header = () => {
                   </div>
                 )}
               </div>
-              <NavLink to="/about" exact>
+              <NavLink to="/about" exact className="hover:text-darkgray">
                 About
               </NavLink>
-              <NavLink to="/" exact>
+              <NavLink to="/" exact className="hover:text-darkgray">
                 Blog
               </NavLink>
-              <NavLink to="/contact" exact>
+              <NavLink to="/contact" exact className="hover:text-darkgray">
                 Contact
               </NavLink>
-              <NavLink to="team" exact>
+              <NavLink to="team" exact className="hover:text-darkgray">
                 Team
               </NavLink>
             </div>
