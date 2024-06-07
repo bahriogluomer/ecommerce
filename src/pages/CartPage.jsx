@@ -8,10 +8,12 @@ import {
   toggleCheckbox,
 } from "../store/actions/shoppingCartActions";
 import OrderSummaryBox from "../components/OrderSummaryBox";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function CartPage() {
   const cart = useSelector((store) => store.shoppingCart.cart);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   return (
     <>
@@ -100,6 +102,12 @@ function CartPage() {
               <div className="">
                 <OrderSummaryBox />
               </div>
+              <button
+                onClick={() => history.push("/createOrder")}
+                className="w-full bg-primary text-white font-semibold px-6 py-2.5 rounded-md"
+              >
+                Checkout
+              </button>
             </div>
           )}
         </div>

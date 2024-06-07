@@ -249,11 +249,11 @@ const Header = () => {
                           <div
                             className={`flex items-center justify-between bg-${
                               index % 2 === 0 ? "darkgray" : "white"
-                            } bg-opacity-5`}
+                            } bg-opacity-5 h-16`}
                           >
                             <div className="flex gap-4">
                               <img
-                                className="w-16 h-16"
+                                className="w-16 h-16 object-cover"
                                 src={c.product.img}
                                 alt="img"
                               />

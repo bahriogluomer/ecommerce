@@ -13,6 +13,8 @@ const initialState = {
   payment: {},
   address: {},
   cartTotal: 0,
+  savedCards: [],
+  selectedCard: {},
 };
 
 export const shoppingCartReducer = (state = initialState, action) => {
