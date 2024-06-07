@@ -62,9 +62,9 @@ export default function CreateOrder() {
     }
     handleAddressForm();
   };
-  const handleAddressDelete = (element) => {
+  const handleAddressDelete = (id) => {
     axiosInstance
-      .delete("/user/address/" + element.target.id, {
+      .delete("/user/address/" + id, {
         headers: {
           Authorization: token,
         },
@@ -73,9 +73,10 @@ export default function CreateOrder() {
       .then(() => getAddress())
       .catch((err) => console.error(err));
   };
-  const handleCardDelete = (element) => {
+
+  const handleCardDelete = (id) => {
     axiosInstance
-      .delete("/user/card/" + element.target.id, {
+      .delete("/user/card/" + id, {
         headers: {
           Authorization: token,
         },
@@ -379,7 +380,7 @@ export default function CreateOrder() {
                       onClick={handleCardForm}
                       className="hover:text-primary"
                     >
-                      Add new card <FontAwesomeIcon icon={faPlus} size="md" />
+                      Add new card <FontAwesomeIcon icon={faPlus} size="lg" />
                     </button>
                   ) : (
                     <button onClick={handleCardGoBack}>

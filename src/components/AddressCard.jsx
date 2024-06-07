@@ -32,7 +32,7 @@ export default function AddressBox({
           </button>
           <button
             id={item.id}
-            onClick={handleDelete}
+            onClick={() => handleDelete(item.id)}
             className="hover:text-red-500"
           >
             <FontAwesomeIcon icon={faTrash} />

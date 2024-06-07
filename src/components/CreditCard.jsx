@@ -30,7 +30,7 @@ export default function CreditCardCard({ data, handleEdit, handleDelete }) {
           </button>
           <button
             id={data.id}
-            onClick={handleDelete}
+            onClick={() => handleDelete(data.id)}
             className="hover:text-red-500"
           >
             <FontAwesomeIcon icon={faTrash} />
