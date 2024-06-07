@@ -8,10 +8,12 @@ import {
   toggleCheckbox,
 } from "../store/actions/shoppingCartActions";
 import OrderSummaryBox from "../components/OrderSummaryBox";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function CartPage() {
   const cart = useSelector((store) => store.shoppingCart.cart);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   return (
     <>
@@ -28,7 +30,7 @@ function CartPage() {
           )}
         </div>
         <div className="flex gap-6 justify-around md:flex-col">
-          <div className="flex flex-col basis-[70%] text-center mx-auto w-full text-darkgray md:mt-4">
+          <div className="flex flex-col basis-[70%] text-center mx-auto w-full mb-12 text-darkgray md:mt-4">
             {cart.map((c, index) => (
               <div className="flex flex-col" key={index}>
                 <div
@@ -55,10 +57,10 @@ function CartPage() {
                       <p className="font-semibold text-nowrap">
                         {c.product.title}
                       </p>
-                      <div className="flex flex-row gap-1">
+                      <div className="flex flex-row gap-1 items-center">
                         <button
                           onClick={() => dispatch(removeFromCart(c.product))}
-                          className="font-semibold rounded-l-md px-2 py-1 border border-darkgray "
+                          className="font-semibold bg-primary text-white w-6 h-6 text-center border rounded-l-sm"
                         >
                           -
                         </button>
@@ -67,14 +69,13 @@ function CartPage() {
                         </div>
                         <button
                           onClick={() => dispatch(addToCart(c.product))}
-                          className="font-semibold rounded-r-md px-2 py-1 border border-darkgray"
+                          className="font-semibold bg-primary text-white w-6 h-6 border rounded-r-sm text-center"
                         >
                           +
                         </button>
                       </div>
                     </div>
                   </div>
-
                   <div className="block font-semibold mr-2 sm:hidden">
                     ${(c.product.price * c.count).toFixed(2)}
                   </div>
@@ -85,7 +86,11 @@ function CartPage() {
                       }}
                       className="font-semibold mr-2"
                     >
-                      <Icon icon="ph:trash" fontSize={20} />
+                      <Icon
+                        icon="ph:trash"
+                        fontSize={20}
+                        className="text-primary hover:text-red-500"
+                      />
                     </button>
                   </div>
                 </div>
@@ -97,7 +102,10 @@ function CartPage() {
               <div className="">
                 <OrderSummaryBox />
               </div>
-              <button className="w-full bg-primary text-white font-semibold px-6 py-2.5 rounded-md">
+              <button
+                onClick={() => history.push("/createOrder")}
+                className="w-full bg-primary text-white font-semibold px-6 py-2.5 rounded-md"
+              >
                 Checkout
               </button>
             </div>
