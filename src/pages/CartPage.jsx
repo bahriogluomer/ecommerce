@@ -49,7 +49,7 @@ function CartPage() {
                       />
                     </div>
                     <img
-                      className="w-28 h-28 object-cover md:h-20 md:w-14"
+                      className="w-28 h-28 object-contain md:h-20 md:w-14"
                       src={c.product.img}
                       alt="img"
                     />

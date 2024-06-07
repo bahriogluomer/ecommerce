@@ -33,7 +33,6 @@ export default function PageBody() {
         <Route path="/contact">
           <ContactPage />
         </Route>
-
         <Route path="/signup">
           <SignUpPage />
         </Route>
