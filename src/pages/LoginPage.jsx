@@ -28,10 +28,8 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center my-auto">
-      <h1 className="font-bold text-2xl text-center text-darkgray my-12">
-        Login
-      </h1>
+    <div className="flex flex-col items-center justify-center mt-24">
+      <h1 className="font-bold text-2xl text-center text-darkgray">Login</h1>
       <form
         onSubmit={handleSubmit(onFormSubmit)}
         className="flex flex-col w-[600px] gap-6 text-secondary md:w-[400px] sm:w-[360px] xs:w-[300px]"
