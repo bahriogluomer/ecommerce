@@ -41,6 +41,10 @@ export default function ProductDetailPage() {
     dispatch(addToCart(product));
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [product]);
+
   return (
     (fetchState == "loading single product" && (
       <div className="flex items-center justify-center h-screen text-secondary">

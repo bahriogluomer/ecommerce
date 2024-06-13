@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
 import { FaSpinner } from "react-icons/fa";
