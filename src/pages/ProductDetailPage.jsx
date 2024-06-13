@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { FaSpinner } from "react-icons/fa";
 import { addToCart } from "../store/actions/shoppingCartActions";
+import { toast } from "react-toastify";
 
 export default function ProductDetailPage() {
   const dispatch = useDispatch();
@@ -30,17 +31,24 @@ export default function ProductDetailPage() {
 
   const product = useSelector((store) => store.product.selectedProduct);
   const fetchState = useSelector((store) => store.product.fetchState);
-
   const products = useSelector((store) => store.product.productList);
-
   const bestSellerProducts = products
     .sort((a, b) => b.rating - a.rating)
     .slice(0, 8);
 
   const handleCart = () => {
-    dispatch(addToCart(product));
+    dispatch(
+      addToCart({
+        ...product,
+        img: product.images[0].url,
+        title: product.name,
+      })
+    );
+    toast.success("Product added to cart", {
+      position: "top-left",
+      autoClose: 2000,
+    });
   };
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [product]);

@@ -46,7 +46,7 @@ function ProductDetailCarousel({ images }) {
               </div>
               {images && images.length > 0 && (
                 <img
-                  className="w-[332px] h-[400px] "
+                  className="w-[332px] h-[400px] object-cover"
                   src={images[currentIndex].url}
                   alt=""
                 />
@@ -58,7 +58,7 @@ function ProductDetailCarousel({ images }) {
                 <div
                   key={index}
                   onClick={() => goToSlide(index)}
-                  className={`transition-all w-24 h-16 ${
+                  className={`transition-all w-16 h-12 ${
                     currentIndex === index ? "opacity-100" : "opacity-30"
                   } text-2xl cursor-pointer`}
                   style={{

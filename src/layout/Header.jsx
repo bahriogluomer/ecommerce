@@ -282,7 +282,13 @@ const Header = () => {
                     </div>
                     {cart.length > 0 && (
                       <div className="flex gap-10 justify-between w-full sm:flex-col sm:gap-4">
-                        <button className="w-48 bg-primary text-white font-semibold px-6 py-2.5 rounded-md sm:w-full">
+                        <button
+                          onClick={() => {
+                            history.push("/createOrder");
+                            toggleCart();
+                          }}
+                          className="w-48 bg-primary text-white font-semibold px-6 py-2.5 rounded-md sm:w-full"
+                        >
                           Checkout
                         </button>
                         <button
