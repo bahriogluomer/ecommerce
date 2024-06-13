@@ -8,10 +8,12 @@ import OrderSummaryBox from "../components/OrderSummaryBox";
 import AddressCard from "../components/AddressCard";
 import CreateCardForm from "../components/CreateCardForm";
 import CreditCard from "../components/CreditCard";
+import { toast } from "react-toastify";
+import { cleanCart } from "../store/actions/shoppingCartActions";
+import { useHistory } from "react-router-dom/cjs/react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 import { faClose, faPlus } from "@fortawesome/free-solid-svg-icons";
-
-const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 export default function CreateOrder() {
   const [page, setPage] = useState("address");
@@ -25,6 +27,11 @@ export default function CreateOrder() {
   const [allCards, setAllCards] = useState([]);
   const [selectedCard, setSelectedCard] = useState({});
   const [selectedShippingAddress, setSelectedShippingAddress] = useState({});
+  const label = { inputProps: { "aria-label": "Checkbox demo" } };
+
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const cart = useSelector((store) => store.shoppingCart.cart);
 
   const handlePage = (page) => {
     setPage(page);
@@ -87,11 +94,13 @@ export default function CreateOrder() {
   };
   const handleCardEdit = (element) => {
     if (element.target.id) {
-      for (const car of allCards) {
-        if (car.id == element.target.id) {
+      for (const card of allCards) {
+        if (card.id == element.target.id) {
           const expireMonthTwoDigit =
-            car.expire_month < 10 ? "0" + car.expire_month : car.expire_month;
-          setCardEdit({ ...car, expire_month: expireMonthTwoDigit });
+            card.expire_month < 10
+              ? "0" + card.expire_month
+              : card.expire_month;
+          setCardEdit({ ...card, expire_month: expireMonthTwoDigit });
           break;
         }
       }
@@ -211,6 +220,57 @@ export default function CreateOrder() {
         break;
       }
     }
+  };
+
+  const completeOrder = () => {
+    const totalPriceProducts = cart.reduce((accumulator, currentValue) => {
+      if (currentValue.checked) {
+        return accumulator + currentValue.count * currentValue.product.price;
+      }
+      return accumulator;
+    }, 0);
+    const shippingPaymentPrice = 20.0;
+    const shippingDiscountLimit = 150;
+    let totalPriceAll =
+      totalPriceProducts +
+      shippingPaymentPrice -
+      (totalPriceProducts >= shippingDiscountLimit ? shippingPaymentPrice : 0);
+    totalPriceAll = (Math.round(totalPriceAll * 100) / 100).toFixed(2);
+    const productsBought = [];
+    for (const product of cart) {
+      if (product.checked) {
+        productsBought.push({
+          product_id: product.product.id,
+          count: product.count,
+          detail: product.product.name,
+        });
+      }
+    }
+
+    axiosInstance
+      .post(
+        "/order",
+        {
+          address_id: selectedShippingAddress.id,
+          order_date: new Date().toISOString().slice(0, 19),
+          card_no: selectedCard.card_no,
+          card_name: selectedCard.name_on_card,
+          card_expire_month: selectedCard.expire_month,
+          card_expire_year: selectedCard.expire_year,
+          card_ccv: selectedCard.ccv,
+          price: totalPriceAll,
+          products: [...productsBought],
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      )
+      .then(() => dispatch(cleanCart()))
+      .then(() => history.push("/"))
+      .then(() => toast.success("Order Completed", { position: "top-left" }))
+      .catch((err) => console.error(err));
   };
 
   return (
@@ -424,7 +484,8 @@ export default function CreateOrder() {
           <OrderSummaryBox />
           <button
             className="w-full bg-primary text-white font-semibold px-6 py-2.5 rounded-md disabled:bg-gray-300"
-            disabled={!selectedCard || !selectedShippingAddress}
+            disabled={!selectedCard && !selectedShippingAddress}
+            onClick={completeOrder}
           >
             Complete Order
           </button>
