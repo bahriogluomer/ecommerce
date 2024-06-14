@@ -220,7 +220,7 @@ const Header = () => {
                   {user.name}
                 </button>
                 {userDropDownOpen && (
-                  <div className="flex items-start justify-center gap-1 absolute mt-48 w-64 p-10 bg-white shadow-lg rounded-md z-10">
+                  <div className="flex items-start justify-center gap-1 absolute mt-36 w-48 p-4 bg-white shadow-lg rounded-md z-10">
                     <div className="flex flex-col text-center">
                       <NavLink
                         to="/previousOrders"

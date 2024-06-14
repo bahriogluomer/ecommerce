@@ -269,7 +269,12 @@ export default function CreateOrder() {
       )
       .then(() => dispatch(cleanCart()))
       .then(() => history.push("/"))
-      .then(() => toast.success("Order Completed", { position: "top-left" }))
+      .then(() =>
+        toast.success(
+          "Order completed, you can check your orders in 'Previous Orders' ",
+          { position: "top-left" }
+        )
+      )
       .catch((err) => console.error(err));
   };
 
