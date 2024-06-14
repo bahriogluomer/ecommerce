@@ -11,7 +11,7 @@ const BackToTopButton = () => {
 
   return (
     <button
-      className="fixed bottom-0 right-0 m-8 py-2 px-4 bg-primary text-white border rounded-full"
+      className="fixed bottom-0 right-0 m-8 py-2 px-4 bg-primary text-white border rounded-full z-10"
       onClick={scrollToTop}
     >
       <FontAwesomeIcon icon={faAngleUp} />

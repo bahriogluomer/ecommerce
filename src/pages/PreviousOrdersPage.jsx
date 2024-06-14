@@ -41,6 +41,7 @@ function PreviousOrdersPage() {
               {order.products.map((product) => (
                 <OrderItem
                   key={product.id}
+                  id={product.id}
                   img={product.images[0].url}
                   name={product.name}
                   description={product.description}

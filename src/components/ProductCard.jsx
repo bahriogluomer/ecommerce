@@ -41,13 +41,13 @@ export default function ProductCard(props) {
   return (
     <NavLink
       to={link}
-      className="flex flex-col items-center m-auto w-[240px] h-[624px] bg-white border border-[#E7E7E7] shadow-sm relative"
+      className="flex flex-col items-center m-auto w-[240px] h-[624px] bg-white border border-[#E7E7E7] shadow-sm relative hover:scale-105 transition-all"
     >
       <div className="absolute top-2 left-1 flex font-semibold bg-darkgray bg-opacity-75 text-white text-xs px-2 py-1 rounded-full gap-1">
         <FontAwesomeIcon className="w-fit text-yellow-400" icon={faStar} />
         {rating}
       </div>
-      <img className="min-w-[238px] h-[300px]" src={img} />
+      <img className="min-w-[238px] h-[300px] object-contain" src={img} />
       <div className="flex flex-col gap-3 items-center pt-6 pb-9 px-2">
         <h5 className="font-bold text-base text-[#252B42]">{title}</h5>
         <div className="flex flex-col justify-center text-center h-24">

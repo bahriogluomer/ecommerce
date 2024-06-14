@@ -32,7 +32,7 @@ export default function Footer() {
       <div className=" bg-[#FAFAFA] p-12  ">
         <div className="mx-auto max-w-[1440px] flex items-center justify-between sm:flex-col sm: gap-4 sm:items-start">
           <h3 className="text-2xl font-bold">Bandage</h3>
-          <div className="flex gap-6">
+          <div className="flex gap-6 bg-lightgray1">
             <a href="">
               <FontAwesomeIcon
                 icon={faFacebook}
