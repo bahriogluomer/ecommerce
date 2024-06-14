@@ -24,7 +24,7 @@ export default function CreditCardCard({ data, handleEdit, handleDelete }) {
           <button
             id={data.id}
             onClick={handleEdit}
-            className="hover:text-darkgray"
+            className="text-darkgray hover:text-primary"
           >
             Edit
           </button>

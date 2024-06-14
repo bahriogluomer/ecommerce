@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircle, faStar } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import { useDispatch, useSelector } from "react-redux";
 import { Icon } from "@iconify/react";
 import { addToCart } from "../store/actions/shoppingCartActions";
@@ -28,7 +28,9 @@ export default function ProductCard(props) {
     }
   }
 
-  const handleCart = () => {
+  const handleCart = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
     dispatch(addToCart(props));
     toast.success("Product added to cart", {
       position: "top-left",
@@ -37,7 +39,10 @@ export default function ProductCard(props) {
   };
 
   return (
-    <div className="flex flex-col items-center m-auto w-[240px] h-[624px] bg-white border border-[#E7E7E7] shadow-sm relative">
+    <NavLink
+      to={link}
+      className="flex flex-col items-center m-auto w-[240px] h-[624px] bg-white border border-[#E7E7E7] shadow-sm relative"
+    >
       <div className="absolute top-2 left-1 flex font-semibold bg-darkgray bg-opacity-75 text-white text-xs px-2 py-1 rounded-full gap-1">
         <FontAwesomeIcon className="w-fit text-yellow-400" icon={faStar} />
         {rating}
@@ -72,20 +77,15 @@ export default function ProductCard(props) {
             <FontAwesomeIcon className="w-fit text-[#252B42]" icon={faCircle} />
           </button>
         </div>
-        <div className="flex gap-2">
-          <Link to={link}>
-            <button className="w-full bg-white font-semibold px-6 py-2.5 text-primary rounded-full border border-primary hover:bg-primary hover:bg-opacity-70 hover:text-white">
-              Learn More
-            </button>
-          </Link>
+        <div>
           <button
             onClick={handleCart}
-            className="border rounded-full border-primary  text-primary p-4 hover:bg-primary hover:bg-opacity-70 hover:text-white"
+            className="border rounded-md bg-primary text-white w-48 h-14 p-2 text-sm text-nowrap flex gap-2 items-center justify-center"
           >
-            <Icon icon="bi:cart" className="text-xl" />
+            <p>Add to cart</p> <Icon icon="bi:cart" className="text-lg" />
           </button>
         </div>
       </div>
-    </div>
+    </NavLink>
   );
 }

@@ -9,6 +9,7 @@ import {
   faChevronDown,
   faEnvelope,
   faPhone,
+  faSignOut,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -28,8 +29,13 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [userDropDownOpen, setUserDropDownOpen] = useState(false);
   const user = useSelector((store) => store.user.userData);
   const cart = useSelector((store) => store.shoppingCart.cart);
+
+  const toggleUserDropDown = () => {
+    setUserDropDownOpen(!userDropDownOpen);
+  };
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
@@ -201,18 +207,38 @@ const Header = () => {
           <div className="flex justify-end items-center text-sm text-primary gap-4 lg:gap-2">
             {user ? (
               <div className="flex font-bold text-secondary items-center justify-center gap-4 mr-2 lg:gap-2 md:hidden">
-                <p className="text-nowrap text-primary font-semibold">
-                  Welcome {user.name}!
-                </p>
                 <div className="flex items-center justify-center">
-                  {/* temporarily put logoutHandler function here until modal is implemented */}
-                  <button onClick={logoutHandler}>
-                    <Gravatar
-                      email={user.email}
-                      className="min-w-6 min-h-6 max-w-8 max-h-8 rounded-full"
-                    />
-                  </button>
+                  <Gravatar
+                    email={user.email}
+                    className="min-w-6 min-h-6 max-w-8 max-h-8 rounded-full"
+                  />
                 </div>
+                <button
+                  onClick={toggleUserDropDown}
+                  className="text-nowrap text-primary font-semibold"
+                >
+                  {user.name}
+                </button>
+                {userDropDownOpen && (
+                  <div className="flex items-start justify-center gap-1 absolute mt-36 w-48 p-4 bg-white shadow-lg rounded-md z-10">
+                    <div className="flex flex-col text-center">
+                      <NavLink
+                        to="/previousOrders"
+                        className="block px-4 py-2 text-secondary hover:text-darkgray hover:bg-gray-200"
+                      >
+                        Previous Orders
+                      </NavLink>
+
+                      <button
+                        onClick={logoutHandler}
+                        className="block px-4 py-2 text-secondary hover:text-darkgray hover:bg-gray-200"
+                      >
+                        Logout
+                        <FontAwesomeIcon icon={faSignOut} className="ml-2" />
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
             ) : (
               <div className="flex gap-2 items-center md:hidden">
@@ -282,7 +308,13 @@ const Header = () => {
                     </div>
                     {cart.length > 0 && (
                       <div className="flex gap-10 justify-between w-full sm:flex-col sm:gap-4">
-                        <button className="w-48 bg-primary text-white font-semibold px-6 py-2.5 rounded-md sm:w-full">
+                        <button
+                          onClick={() => {
+                            history.push("/createOrder");
+                            toggleCart();
+                          }}
+                          className="w-48 bg-primary text-white font-semibold px-6 py-2.5 rounded-md sm:w-full"
+                        >
                           Checkout
                         </button>
                         <button

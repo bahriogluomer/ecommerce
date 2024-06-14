@@ -10,6 +10,7 @@ import ErrorPage from "../pages/ErrorPage";
 import LoginPage from "../pages/LoginPage";
 import CartPage from "../pages/CartPage";
 import ProtectedCreateOrderPage from "../components/ProtectedCreateOrderPage";
+import ProtectedPreviousOrdersPage from "../components/ProtectedPreviousOrdersPage";
 
 export default function PageBody() {
   return (
@@ -23,6 +24,9 @@ export default function PageBody() {
         </Route>
         <Route path="/shopping/:genderParams?/:categoryParams?">
           <ShoppingPage />
+        </Route>
+        <Route path="/previousOrders">
+          <ProtectedPreviousOrdersPage />
         </Route>
         <Route path="/about">
           <AboutPage />
