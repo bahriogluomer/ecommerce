@@ -63,19 +63,26 @@ export const fetchProducts =
 export const fetchMoreProducts =
   (filter, sort, category, page, limit, offset) => async (dispatch) => {
     dispatch(setFetchState("loading more products"));
+    console.log("page from fetch more products: ", page);
+    console.log("limit:", limit, "offset:", offset);
+
+    // Construct the query parameters
+    const queryParams = new URLSearchParams();
+    if (filter) queryParams.append("filter", filter);
+    if (sort) queryParams.append("sort", sort);
+    if (category) queryParams.append("category", category);
+    if (page) queryParams.append("page", page);
+    if (limit) queryParams.append("limit", limit);
+    if (offset) queryParams.append("offset", offset);
+
+    const url = `/products?${queryParams.toString()}`;
+    console.log("Fetching URL:", url);
 
     await axiosInstance
-      .get(
-        `/products?${filter ? "filter=" + filter : ""}${
-          sort ? `&sort=${sort}` : ""
-        }${category ? `&category=${category}` : ""}${
-          page ? `&page=${page}` : ""
-        }${limit ? `&limit=${limit}` : ""}${offset ? `&offset=${offset}` : ""}`
-      )
+      .get(url)
       .then((res) => {
         dispatch(updateProductList(res.data["products"]));
         dispatch(setTotalProductCount(res.data["total"]));
-        console.log("fetched more products", res.data["products"]);
         dispatch(setFetchState("success"));
       })
       .catch((err) => {

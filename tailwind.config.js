@@ -29,6 +29,9 @@ export default {
 
       sm: { max: "639px" },
       // => @media (max-width: 639px) { ... }
+
+      xs: { max: "479px" },
+      // => @media (max-width: 479px) { ... }
     },
   },
   plugins: [],

@@ -73,20 +73,6 @@ export default function ShoppingPage() {
     }
   }, [genderParams, categoryParams, categories, category]);
 
-  // console.log("replaced:", replaceTurkishCharacters(categoryParams));
-
-  function debounce(func, wait) {
-    let timeout;
-    return function executedFunction() {
-      const later = () => {
-        timeout = null;
-        func();
-      };
-      clearTimeout(timeout);
-      timeout = setTimeout(later, wait);
-    };
-  }
-
   const handleScrollForBackToTop = () => {
     const scrollY = window.scrollY;
 
@@ -112,47 +98,69 @@ export default function ShoppingPage() {
     };
   });
 
-  const handleScroll = debounce(() => {
+  const handleScroll = () => {
     if (
       window.innerHeight + document.documentElement.scrollTop + 1 >=
       document.documentElement.scrollHeight
     ) {
-      if (setHasMore === false) {
+      if (!hasMore) {
         return;
       }
-      setHasMore(true);
 
-      setPage((prev) => prev + 1);
-      dispatch(fetchMoreProducts(filter, sort, category, page, limit, offset));
-      if (page * limit >= totalProductCount) {
-        setHasMore(false);
-      }
+      const nextPage = page + 1;
+
+      setPage(nextPage);
+
+      setTimeout(() => {
+        setHasMore(true);
+        dispatch(
+          fetchMoreProducts(
+            filter,
+            sort,
+            category,
+            nextPage,
+            limit,
+            (nextPage - 1) * limit
+          )
+        );
+        if (nextPage * limit >= totalProductCount) {
+          setHasMore(false);
+        }
+        history.push(
+          location.pathname +
+            "?" +
+            (filter ? "filter=" + filter + "&" : "") +
+            (sort ? "sort=" + sort + "&" : "") +
+            (category ? "category=" + category : "") +
+            (nextPage ? "&page=" + nextPage : "")
+        );
+      }, 0);
+    }
+  };
+
+  useEffect(() => {
+    const newPage = 1; // Set page to 1
+    const newOffset = (newPage - 1) * limit;
+    setHasMore(true);
+
+    setPage(newPage); // Update the page state
+
+    // Use a callback to ensure state is updated before dispatch
+    setTimeout(() => {
+      dispatch(
+        fetchProducts(filter, sort, category, newPage, limit, newOffset)
+      );
+      dispatch(setPageCount(Math.ceil(totalProductCount / limit)));
       history.push(
         location.pathname +
           "?" +
           (filter ? "filter=" + filter + "&" : "") +
           (sort ? "sort=" + sort + "&" : "") +
           (category ? "category=" + category : "") +
-          (page ? "&page=" + page : "")
+          (newPage ? "&page=" + newPage : "")
       );
-    }
-  }, 300);
-
-  useEffect(() => {
-    dispatch(fetchProducts(filter, sort, category, page, limit, offset));
-    setPage(1);
-    dispatch(setPageCount(Math.ceil(totalProductCount / limit)));
-    // dispatch(updateProductList(products));
-    history.push(
-      location.pathname +
-        "?" +
-        (filter ? "filter=" + filter + "&" : "") +
-        (sort ? "sort=" + sort + "&" : "") +
-        (category ? "category=" + category : "") +
-        (page ? "&page=" + page : "")
-    );
-    console.log("category from fetch products", category);
-  }, [category]);
+    }, 0);
+  }, [category, limit]);
 
   // console.log("category", category);
 
@@ -297,7 +305,7 @@ export default function ShoppingPage() {
             Loading...
           </div>
         ) : products.length > 0 ? (
-          <div className="mx-auto max-w-[1440px] flex flex-wrap items-start content-start gap-6 my-20">
+          <div className="mx-auto max-w-[1440px] grid grid-cols-5 gap-x-0.5 gap-y-8 my-20 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1">
             {products.map((product, id) => (
               <ProductCard
                 key={id}
